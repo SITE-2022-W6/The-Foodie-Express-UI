@@ -1,0 +1,21 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2em;
+  background: #f0f0f0;
+}
+
+.navbar .links {
+  display: flex;
+  flex-direction: row;
+  gap: 2em;
+}
+
+.navbar .login-btn {
+  background: linear-gradient(45deg, rgba(0,180,216,1) 0%, rgba(0,205,216,1) 100%);
+}
+
+.navbar .signup-btn {
+  background: linear-gradient(45deg, rgba(0,119,182,1) 0%, rgba(0,166,209,1) 100%);
+}
