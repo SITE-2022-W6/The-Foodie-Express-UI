@@ -1,4 +1,4 @@
-.login {
+.register {
   background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
   border-radius: 1em;
   padding: 4em;
@@ -8,7 +8,7 @@
   transform: translate(-50%, -50%);
 }
 
-.login .header {
+.register .header {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -16,12 +16,12 @@
   align-items: center;
 }
 
-.login .head {
+.register .head {
   margin: 0.25em 0 0 0;
   font-size: 2.5em;
 }
 
-.login .form {
+.register .form {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -29,43 +29,55 @@
   align-items: center;
 }
 
-.login .spacing {
+.register .row {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 1.5em
+}
+
+.register .spacing {
   margin-top: 1em;
 }
 
-.login .label,
-.login .signup-info {
+.register .label,
+.register .login-info {
   font-weight: bold;
 }
 
-.login .label {
+.register .label {
   font-size: 0.9em;
 }
 
-.login .login-input {
+.register .signup-input,
+.register .role-sel {
   width: 250px;
   border: 0.5px solid #00000080;
 }
 
-.login ::placeholder {
+.register ::placeholder {
   opacity: 0.5;
 }
 
-.login .login-btn {
+.register .checkbox {
+  width: 267px;
+}
+
+.register .signup-btn {
   background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
   color: #ffffff;
 }
 
-.login .line-break {
+.register .line-break {
   margin-top: 1em;
   border: 0.5px solid #00000080;
 }
 
-.login .signup-info {
+.register .login-info {
   text-align: center;
 }
 
-.login .text-link {
+.register .text-link {
   background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
   -webkit-background-clip: text;
   -moz-background-clip: text;
