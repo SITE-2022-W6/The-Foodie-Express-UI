@@ -8,6 +8,12 @@
   transform: translate(-50%, -50%);
 }
 
+.login .label,
+.login .signup-info,
+.login .err-msg {
+  font-weight: bold;
+}
+
 .login .header {
   display: flex;
   justify-content: center;
@@ -21,6 +27,19 @@
   font-size: 2.5em;
 }
 
+.login .err-msg {
+  margin: 1em 0 0 0;
+  background: linear-gradient(45deg, #ef233c 0%, #ff5a7e 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -o-background-clip: text;
+  -ms-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-float-color: transparent;
+  -o-text-float-color: transparent;
+  -ms-text-float-color: transparent;
+}
+
 .login .form {
   display: flex;
   justify-content: center;
@@ -31,11 +50,6 @@
 
 .login .spacing {
   margin-top: 1em;
-}
-
-.login .label,
-.login .signup-info {
-  font-weight: bold;
 }
 
 .login .label {
@@ -63,6 +77,12 @@
 
 .login .signup-info {
   text-align: center;
+}
+
+.login .loading {
+  display: flex;
+  gap: 5px;
+  pointer-events: none;
 }
 
 .login .text-link {

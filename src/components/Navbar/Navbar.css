@@ -2,14 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 2em;
+  height: 10vh;
+  padding: 0 5em;
   background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
 }
 
-.navbar .links {
+.navbar .links,
+.navbar .login-signup {
   display: flex;
   flex-direction: row;
   gap: 2em;
+}
+
+.navbar .address-btn {
+  display: flex;
+  gap: 5px;
+  background: linear-gradient(45deg, #0077b6 0%, #00a6d1 100%);
+  color: #ffffff;
+  align-items: center;
 }
 
 .navbar .login-btn {
@@ -20,4 +30,83 @@
 .navbar .signup-btn {
   background: linear-gradient(45deg, #0077b6 0%, #00a6d1 100%);
   color: #ffffff;
+}
+
+.navbar .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.navbar .dropdown-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  width: 37px;
+  height: 37px;
+  border-radius: 5px;
+  border: 1px solid #00000080;
+}
+
+.navbar .dropdown-content {
+  position: absolute;
+  background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
+  width: 80px;
+  right: 0;
+  margin-top: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #00000080;
+  z-index: 1;
+}
+
+.navbar .dropdown .link {
+  margin: 0.5em;
+  color: #000000;
+  font-weight: bold;
+  background-color: transparent;
+  border: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1em;
+  text-align: start;
+  letter-spacing: -0.04em;
+  margin: 0.5em 0 0 0;
+  cursor: pointer;
+}
+
+.navbar .dropdown .link:last-child {
+  margin-bottom: 0.5em;
+}
+
+.navbar .dropdown .link:hover {
+  background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -o-background-clip: text;
+  -ms-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-float-color: transparent;
+  -o-text-float-color: transparent;
+  -ms-text-float-color: transparent;
+}
+
+.navbar .pg {
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 0.5em 0;
+}
+
+.navbar .address-input {
+  border: 1px solid #00000080;
+  width: 250px;
+}
+
+.navbar .update-address-btn {
+  background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
+  color: #ffffff;
+}
+
+.navbar .form {
+  display: flex;
+  align-items: center;
+  gap: 20px
 }

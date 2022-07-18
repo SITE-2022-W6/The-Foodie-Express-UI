@@ -1,38 +1,49 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
+import { Ripple } from 'react-spinners-css';
+import apiClient from '../../services/apiClient';
 import './Register.css';
 
 export default function Register(props) {
-  const [confirmedPwd, setConfirmedPwd] = useState('');
   const [signupForm, setSignupForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phoneNumber: '',
-    password: '',
-    role: '',
+    password: ''
   });
+  const [confirmedPwd, setConfirmedPwd] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  props.setIsLandingPage(false);
+  props.setFooter(false);
   props.setHideNavbar(true);
 
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
     if (name === 'confirmedPwd') {
-      setConfirmedPwd(value)
+      setConfirmedPwd(value);
     } else {
       setSignupForm({ ...signupForm, [name]: value });
     }
   };
 
-  const signUserUp = () => {
-    console.log(`First Name: ${signupForm.firstName}`);
-    console.log(`Last Name: ${signupForm.lastName}`);
-    console.log(`Email: ${signupForm.email}`);
-    console.log(`Phone Number: ${signupForm.phoneNumber}`);
-    console.log(`Password: ${signupForm.password}`);
+  const signUserUp = async () => {
+    if (signupForm.password !== confirmedPwd) {
+      setError('Password does not match');
+      return
+    }
+    setIsLoading(true);
+    const { data, error } = await apiClient.signupUser(signupForm);
+    if (error) {
+      setError(error);
+    }
+    if (data?.user) {
+      props.setIsAuthenticated(true);
+      apiClient.setToken(data.token);
+    }
     setSignupForm({
       firstName: '',
       lastName: '',
@@ -41,13 +52,17 @@ export default function Register(props) {
       password: '',
       role: '',
     });
+    setConfirmedPwd('')
+    setIsLoading(false);
   };
 
   return (
     <div className="register">
+      {props.isAuthenticated && <Navigate to="/dashboard" replace={true} />}
       <div className="header">
         <img src="./icon.svg" width="75" />
         <h1 className="head">Sign Up</h1>
+        {error ? <p className="err-msg">{error}</p> : null}
       </div>
       <div className="form">
         <div className="row">
@@ -128,17 +143,17 @@ export default function Register(props) {
             />
           </div>
         </div>
-        {/*<div className="spacing">
-          <label className="label">Select Role</label>
-          <br />
-          <select className="select role-sel" name="roles">
-            <option disabled selected value> -- select an option -- </option>
-            <option value="customer">Customer</option>
-            <option value="deliver">Deliver</option>
-          </select>
-        </div> */}
         <div className="spacing">
-          <button className="btn signup-btn" onClick={signUserUp}>Sign Up</button>
+          {!isLoading ? (
+            <button className="btn signup-btn" onClick={signUserUp}>
+              Sign Up
+            </button>
+          ) : (
+            <button className="btn signup-btn loading" disabled>
+              <div style={{ margin: '0' }}>Signing Up</div>
+              <Ripple color="#ffffff" size={21} />
+            </button>
+          )}
         </div>
       </div>
       <hr className="line-break" />

@@ -1,0 +1,34 @@
+.footer {
+  background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
+  padding: 1em;
+  margin-top: auto;
+}
+
+.footer .containers {
+  display: flex;
+  justify-content: center;
+  gap: 8em;
+}
+
+.footer .head {
+  text-align: center;
+  margin: 0.5em 0;
+}
+
+.footer .pg {
+  font-weight: bold;
+}
+
+.footer .about-us {
+  width: 500px;
+}
+
+.footer .icons {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+}
+
+.footer .copyright {
+  text-align: center;
+}

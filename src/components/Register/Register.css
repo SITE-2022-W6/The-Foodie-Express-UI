@@ -8,6 +8,12 @@
   transform: translate(-50%, -50%);
 }
 
+.register .label,
+.register .login-info,
+.register .err-msg {
+  font-weight: bold;
+}
+
 .register .header {
   display: flex;
   justify-content: center;
@@ -19,6 +25,19 @@
 .register .head {
   margin: 0.25em 0 0 0;
   font-size: 2.5em;
+}
+
+.register .err-msg {
+  margin: 1em 0 0 0;
+  background: linear-gradient(45deg, #ef233c 0%, #ff5a7e 100%);
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -o-background-clip: text;
+  -ms-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-float-color: transparent;
+  -o-text-float-color: transparent;
+  -ms-text-float-color: transparent;
 }
 
 .register .form {
@@ -38,11 +57,6 @@
 
 .register .spacing {
   margin-top: 1em;
-}
-
-.register .label,
-.register .login-info {
-  font-weight: bold;
 }
 
 .register .label {
@@ -75,6 +89,12 @@
 
 .register .login-info {
   text-align: center;
+}
+
+.register .loading {
+  display: flex;
+  gap: 5px;
+  pointer-events: none;
 }
 
 .register .text-link {
