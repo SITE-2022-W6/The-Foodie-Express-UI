@@ -6,6 +6,7 @@ import apiClient from '../../services/apiClient';
 import './Register.css';
 
 export default function Register(props) {
+  {/* The useState for setting the sign up form, password confirmation, loading, and error handling */}
   const [signupForm, setSignupForm] = useState({
     firstName: '',
     lastName: '',
@@ -17,9 +18,11 @@ export default function Register(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  {/* Toggle whether to hide the navbar and/or footer */}
   props.setFooter(false);
   props.setHideNavbar(true);
 
+  {/* To update the signup form useState */}
   const handleChange = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -30,6 +33,7 @@ export default function Register(props) {
     }
   };
 
+  {/* The handle submit to sign the user up */}
   const signUserUp = async () => {
     if (signupForm.password !== confirmedPwd) {
       setError('Password does not match');
@@ -58,13 +62,16 @@ export default function Register(props) {
 
   return (
     <div className="register">
+      {/* Redirect the user to the dashboard page after signing up */}
       {props.isAuthenticated && <Navigate to="/dashboard" replace={true} />}
       <div className="header">
+        {/* The Register Header */}
         <img src="./icon.svg" width="75" />
         <h1 className="head">Sign Up</h1>
         {error ? <p className="err-msg">{error}</p> : null}
       </div>
       <div className="form">
+        {/* The form for user to enter its information */}
         <div className="row">
           <div className="spacing">
             <label className="label">First Name</label>
@@ -144,6 +151,7 @@ export default function Register(props) {
           </div>
         </div>
         <div className="spacing">
+          {/* The button to signup with the given information */}
           {!isLoading ? (
             <button className="btn signup-btn" onClick={signUserUp}>
               Sign Up
@@ -158,6 +166,7 @@ export default function Register(props) {
       </div>
       <hr className="line-break" />
       <p className="login-info">
+        {/* For users who already has the account will go directly to the login page */}
         Already have an account? Log in{' '}
         <Link to="/login" className="text-link">
           here

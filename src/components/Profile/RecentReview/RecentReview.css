@@ -1,0 +1,18 @@
+.recent-review {
+  background: #ffffff;
+  padding: 1em;
+  border-radius: 1em;
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.review {
+  background: #f1f1f1;
+  padding: 1em;
+  
+}
+
+.review .content{
+  width: 800px;
+}

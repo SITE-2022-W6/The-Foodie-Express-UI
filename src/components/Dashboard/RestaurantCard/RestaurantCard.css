@@ -1,0 +1,11 @@
+.restaurant-card {
+  display: inline-block;
+  background: #ffffff;
+  border-radius: 1em;
+}
+
+.restaurant-card .img {
+  width: 350px;
+  height: 250px;
+  border-radius: 1em 1em 0 0;
+}

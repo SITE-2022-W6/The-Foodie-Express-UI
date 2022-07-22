@@ -1,0 +1,38 @@
+.dashboard {
+  margin: 3em 5em;
+}
+
+.dashboard .filter-session {
+  background: #ffffff;
+  padding: 1em 2em;
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  border-radius: 1em;
+}
+
+.dashboard .search-input {
+  width: 300px
+}
+
+.dashboard .filter {
+  display: flex;
+  gap: 30px;
+}
+
+.dashboard .cart-btn {
+  display: flex;
+  gap: 5px;
+  background: linear-gradient(45deg, #0077b6 0%, #00a6d1 100%);
+  color: #ffffff;
+  align-items: center;
+}
+
+.dashboard .grid {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 2em auto;
+  flex-wrap: wrap;
+  gap: 2em;
+}

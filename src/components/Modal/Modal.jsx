@@ -3,6 +3,7 @@ import { BiArrowBack } from 'react-icons/bi';
 import './Modal.css';
 
 export default function Modal({ open, children, onClose }) {
+  {/* The modal pop for user to update its delivery address and profile */}
   if (!open) return null;
   return (
     <>
