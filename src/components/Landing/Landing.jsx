@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LocationSearchBar from '../LocationSearchBar/LocationSearchBar';
 import './Landing.css';
 
 export default function Landing(props) {
@@ -22,14 +23,16 @@ export default function Landing(props) {
           <p className="pg">You select we deliver- fast, fresh, and instant food</p>
         </div>
         <div className="form">
-          <input
+          {/* <input
             type="text"
             name="address"
             placeholder="Enter Delivery Address"
             className="input address-input"
             onChange={handleChange}
-          />
+          /> */}
+          <LocationSearchBar />
           <button className="btn find-food-btn" onClick={() => navigate('/dashboard')}>Find Food</button>
+          <p className='credit'>Autocomplete powered by Google Maps API</p>
         </div>
       </div>
     </div>
