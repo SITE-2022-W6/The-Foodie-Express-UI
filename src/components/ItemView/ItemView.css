@@ -1,0 +1,22 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.item-view {
+  background: #fff;
+  padding: 1em;
+  margin: 2em;
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 1em;
+}
+
+.item-view .review-session {
+  height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+}
