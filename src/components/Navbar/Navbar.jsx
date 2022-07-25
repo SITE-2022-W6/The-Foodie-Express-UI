@@ -5,6 +5,7 @@ import { BiMap, BiUser } from 'react-icons/bi';
 import Modal from '../Modal/Modal';
 import apiClient from '../../services/apiClient';
 import './Navbar.css';
+import LocationSearchBar from '../LocationSearchBar/LocationSearchBar';
 
 export default function Navbar(props) {
   {/* The useState for updating the address, dropdown and the modal popup */}
@@ -17,16 +18,18 @@ export default function Navbar(props) {
     setDropdown(current => !current);
   }
 
-  {/* To update the address useState */}
-  const handleChange = (e) => {
-    let value = e.target.value;
-    setUpdatedAddress(value);
-  };
-
   {/* Handle submit to update the new address useState */}
   const updateAddress = () => {
-    props.setAddress(updatedAddress)
-    setUpdatedAddress('')
+    //Extracting state and city from address
+    const state = props.address.substring(props.address.length - 7, props.address.length - 5)
+    const short_address = props.address.substring(0, props.address.length - 9)
+    if (short_address.lastIndexOf(", ") == -1) {
+        props.setCityState({ city: short_address, state })
+    }
+    else {
+        const city = short_address.substring(short_address.lastIndexOf(", ") + 2)
+        props.setCityState({ city, state })
+    }
     setIsOpen(false);
   }
 
@@ -64,13 +67,9 @@ export default function Navbar(props) {
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
             <p className="pg">Enter your new delivery address</p>
             <div className="form">
-              <input
-                type="text"
-                name="address"
-                placeholder="1 Main Street, City, State"
-                className="input address-input"
-                onChange={handleChange}
-              />
+              <div className="searchBar">
+                <LocationSearchBar setAddress={props.setAddress} cityState ={props.cityState} setCityState={props.setCityState}/>
+              </div>
               <button className="btn update-address-btn" onClick={updateAddress}>Update Address</button>
             </div>
           </Modal>

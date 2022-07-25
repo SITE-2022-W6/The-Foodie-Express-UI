@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LocationSearchBar from '../LocationSearchBar/LocationSearchBar';
 import './Landing.css';
 
 export default function Landing(props) {
@@ -9,11 +10,19 @@ export default function Landing(props) {
   
   const navigate = useNavigate();
 
-  {/* To update the address useState */}
-  const handleChange = (e) => {
-    let value = e.target.value;
-    props.setAddress(value);
-  };
+    const handleOnClick = () => {
+      //Extracting state and city from address
+    const state = props.address.substring(props.address.length - 7, props.address.length - 5)
+    const short_address = props.address.substring(0, props.address.length - 9)
+    if (short_address.lastIndexOf(", ") == -1) {
+        props.setCityState({ city: short_address, state })
+    }
+    else {
+        const city = short_address.substring(short_address.lastIndexOf(", ") + 2)
+        props.setCityState({ city, state })
+    }
+    navigate('/dashboard')
+    };
 
   return (
     <div className="landing">
@@ -25,16 +34,9 @@ export default function Landing(props) {
           <p className="pg">We’ve got something for everyone.</p>
         </div>
         <div className="form">
-          {/* Form for user to enter its delivery address and goes to the 
-            dashboard to find the nearby restaurant */}
-          <input
-            type="text"
-            name="address"
-            placeholder="Enter Delivery Address"
-            className="input address-input"
-            onChange={handleChange}
-          />
-          <button className="btn find-food-btn" onClick={() => navigate('/dashboard')}>Find Food</button>
+          <LocationSearchBar setAddress={props.setAddress} cityState ={props.cityState} setCityState={props.setCityState}/>
+          <button className="btn find-food-btn" onClick={handleOnClick}>Find Food</button>
+          <p className='credit'>Autocomplete powered by Google Maps API</p>
         </div>
       </div>
     </div>

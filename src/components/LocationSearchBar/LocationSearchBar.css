@@ -1,0 +1,4 @@
+[data-reach-combobox-popover] {
+    position: relative;
+    z-index: 10000;
+}

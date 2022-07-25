@@ -3,6 +3,8 @@ import { Navigate } from 'react-router-dom';
 import { useState } from 'react';
 import RestaurantCard from './RestaurantCard/RestaurantCard';
 import './Dashboard.css';
+import apiClient from '../../services/apiClient';
+
 
 export default function Dashboard(props) {
   {/* useState to find the restaurant with the given search term */}
@@ -16,6 +18,21 @@ export default function Dashboard(props) {
   {/* Toggle whether to hide the navbar and/or footer */}
   props.setHideNavbar(false);
   props.setFooter(true);
+  const [restaurants, setRestaurants] = React.useState()
+  const [isLoading, setIsLoading] = React.useState(true)
+
+  React.useEffect(() => {
+    async function getRestaurants(cityState)
+    {
+      const restaurantlist = await apiClient.getRestaurantsByLocation(cityState)
+      // console.log(restaurantlist)
+      setRestaurants(restaurantlist)
+      setIsLoading(false)
+
+    }
+    setIsLoading(true)
+    getRestaurants(props.cityState)
+  }, [props.cityState])
 
   return (
     <div className="dashboard">

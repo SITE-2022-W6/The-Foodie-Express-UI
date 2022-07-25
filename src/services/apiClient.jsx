@@ -60,6 +60,12 @@ class ApiClient {
     this.setToken(null);
     localStorage.removeItem(this.tokenName);
   }
+
+  async getRestaurantsByLocation(cityState)
+  {
+    let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}`})
+    return response
+  }
 }
 
 export default new ApiClient('http://localhost:3001');

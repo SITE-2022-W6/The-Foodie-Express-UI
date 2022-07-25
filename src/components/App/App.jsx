@@ -17,6 +17,7 @@ function App() {
     user authentication, and user profile */}
   const [hideNavbar, setHideNavbar] = useState(false);
   const [address, setAddress] = useState('');
+  const [cityState, setCityState] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userInfo, setUserInfo] = useState({
     id: 0,
@@ -36,6 +37,8 @@ function App() {
           isAuthenticated={isAuthenticated}
           setAddress={setAddress}
           address={address}
+          cityState={cityState}
+          setCityState={setCityState}
           userInfo={userInfo}
           setUserInfo={setUserInfo}
         />
@@ -49,6 +52,8 @@ function App() {
             <Landing
               address={address}
               setAddress={setAddress}
+              cityState={cityState}
+              setCityState={setCityState}
               setFooter={setFooter}
               setHideNavbar={setHideNavbar}
             />
@@ -90,6 +95,7 @@ function App() {
               setHideNavbar={setHideNavbar}
               userInfo={userInfo}
               address={address}
+              cityState={cityState}
             />
           }
         />
