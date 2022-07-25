@@ -1,8 +1,13 @@
-.restaurant-view {
+.grid {
+  display: flex;
+  margin: 2em 15%;
+  gap: 40px;
+}
+
+.restaurant-view, .menu-box {
   background-color: #ffffff;
   padding: 1em;
   border-radius: 1em;
-  margin: 2em 15%;
 }
 
 .restaurant-view .banner {
@@ -20,4 +25,9 @@
   flex-direction: column;
   border-radius: 1em;
   margin: 1em;
+}
+
+.menu-box {
+  position: fixed;
+  right: 20px;
 }
