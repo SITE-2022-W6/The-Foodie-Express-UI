@@ -1,11 +1,6 @@
+//Displays Google autocomplete textbox
 //Get the result from the autocomplete
-//Country will probably be the last section
-//Then city will be second to last?
-//Second to last will be state....
-//Hopefully that works in enough cases
-
 import * as React from 'react';
-import axios from 'axios'
 import './LocationSearchBar.css'
 import usePlacesAutocomplete from "use-places-autocomplete";
 import {
@@ -18,7 +13,7 @@ import {
 
 import "@reach/combobox/styles.css";
 
-export default function LocationSearchBar() {
+export default function LocationSearchBar({ setAddress = () => { }, cityState, setCityState = () => { }}) {
     const {
         ready,
         value,
@@ -30,21 +25,15 @@ export default function LocationSearchBar() {
         }
     });
 
+    //Changes value in textbox
     const handleInput = (e) => {
-        setValue(e.target.value);
+        setValue(e.target.value)
     };
 
+    //Updates city and state after an address is selected
     const handleSelect = (val) => {
         setValue(val, false);
-        console.log(val)
-        //Extracting state and city from address
-        const state = val.substring(val.length - 7, val.length - 5)
-        console.log(state)
-        const short_address = val.substring(0, val.length - 9)
-        const city = short_address.substring(short_address.lastIndexOf(", ")+2)
-        console.log(city)
-
-
+        setAddress(val)
     };
 
     return (

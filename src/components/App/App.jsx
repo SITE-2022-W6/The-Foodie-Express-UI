@@ -12,6 +12,7 @@ import './App.css';
 function App() {
   const [hideNavbar, setHideNavbar] = useState(false);
   const [address, setAddress] = useState('');
+  const [cityState, setCityState] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userInfo, setUserInfo] = useState({
     firstName: '',
@@ -28,6 +29,8 @@ function App() {
           isAuthenticated={isAuthenticated}
           setAddress={setAddress}
           address={address}
+          cityState={cityState}
+          setCityState={setCityState}
         />
       ) : null}
       <Routes>
@@ -38,6 +41,8 @@ function App() {
             <Landing
               address={address}
               setAddress={setAddress}
+              cityState={cityState}
+              setCityState={setCityState}
               setFooter={setFooter}
               setHideNavbar={setHideNavbar}
             />
@@ -68,7 +73,7 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <Dashboard setFooter={setFooter} setHideNavbar={setHideNavbar} />
+            <Dashboard setFooter={setFooter} setHideNavbar={setHideNavbar} cityState={cityState}/>
           }
         />
       </Routes>

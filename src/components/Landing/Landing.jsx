@@ -9,10 +9,19 @@ export default function Landing(props) {
   
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    let value = e.target.value;
-    props.setAddress(value);
-  };
+    const handleOnClick = () => {
+      //Extracting state and city from address
+    const state = props.address.substring(props.address.length - 7, props.address.length - 5)
+    const short_address = props.address.substring(0, props.address.length - 9)
+    if (short_address.lastIndexOf(", ") == -1) {
+        props.setCityState({ city: short_address, state })
+    }
+    else {
+        const city = short_address.substring(short_address.lastIndexOf(", ") + 2)
+        props.setCityState({ city, state })
+    }
+    navigate('/dashboard')
+    };
 
   return (
     <div className="landing">
@@ -23,15 +32,8 @@ export default function Landing(props) {
           <p className="pg">You select we deliver- fast, fresh, and instant food</p>
         </div>
         <div className="form">
-          {/* <input
-            type="text"
-            name="address"
-            placeholder="Enter Delivery Address"
-            className="input address-input"
-            onChange={handleChange}
-          /> */}
-          <LocationSearchBar />
-          <button className="btn find-food-btn" onClick={() => navigate('/dashboard')}>Find Food</button>
+          <LocationSearchBar setAddress={props.setAddress} cityState ={props.cityState} setCityState={props.setCityState}/>
+          <button className="btn find-food-btn" onClick={handleOnClick}>Find Food</button>
           <p className='credit'>Autocomplete powered by Google Maps API</p>
         </div>
       </div>
