@@ -1,5 +1,6 @@
 import React from 'react';
 import Modal from '../Modal/Modal';
+import Rating from 'react-rating';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ItemView.css';
@@ -15,12 +16,13 @@ export default function ItemView() {
         <h1>Food Name</h1>
         <h2>Restaurant Name</h2>
         <p>Food Discription</p>
+        <Rating fractions={2} readonly/>
         <div className="address-modal">
           {/* A button to add a review via modal popup */}
           <button className="btn" onClick={() => setIsOpen(true)}>Add Review</button>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
             <h1>Write a Review</h1>
-            <p>Rating:</p>
+            <Rating fractions={2}/>
             <textarea></textarea>
             <button className="btn" onClick={() => setIsOpen(false)}>Submit your Review</button>
           </Modal>
@@ -43,7 +45,7 @@ export function Review(props) {
     <div className="review">
       <div className="header">
         <h3>User Name</h3>
-        <p>Rating:</p>
+        <Rating fractions={2} readonly/>
         <p>Date:</p>
       </div>
       <div className="content">
