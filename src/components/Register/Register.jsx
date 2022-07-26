@@ -45,7 +45,14 @@ export default function Register(props) {
       setError(error);
     }
     if (data?.user) {
-      props.setIsAuthenticated(true);
+      props.setUserInfo({
+        id: data.user.id,
+        firstName: data.user.first_name,
+        lastName: data.user.last_name,
+        email: data.user.email,
+        phoneNumber: data.user.phone_number,
+      })
+
       apiClient.setToken(data.token);
       console.log(data.user);
       props.setUserInfo({
