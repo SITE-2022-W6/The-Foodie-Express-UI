@@ -4,8 +4,25 @@
   border-radius: 1em;
 }
 
-.restaurant-card .img {
+.restaurant-card .banner {
   width: 350px;
   height: 250px;
   border-radius: 1em 1em 0 0;
+  object-fit: cover;
+}
+
+.restaurant-card .title {
+  width: 300px;
+  font-size: 1.5em;
+  margin: 0.5em 0;
+}
+
+.restaurant-card .address {
+  width: 300px;
+  font-size: 1em;
+  margin: 0.25em 0;
+}
+
+.restaurant-card .info {
+  margin: 1em;
 }

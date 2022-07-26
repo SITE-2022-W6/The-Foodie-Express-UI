@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Ripple } from 'react-spinners-css';
+import { useState, useEffect } from 'react';
 import RestaurantCard from './RestaurantCard/RestaurantCard';
 import './Dashboard.css';
 import apiClient from '../../services/apiClient';
@@ -18,19 +19,19 @@ export default function Dashboard(props) {
   {/* Toggle whether to hide the navbar and/or footer */}
   props.setHideNavbar(false);
   props.setFooter(true);
-  const [restaurants, setRestaurants] = React.useState()
-  const [isLoading, setIsLoading] = React.useState(true)
 
-  React.useEffect(() => {
+  const [restaurants, setRestaurants] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
     async function getRestaurants(cityState)
     {
+      setIsLoading(true)
       const restaurantlist = await apiClient.getRestaurantsByLocation(cityState)
-      // console.log(restaurantlist)
-      setRestaurants(restaurantlist)
+      console.log(restaurantlist.data.restaurants)
+      setRestaurants(restaurantlist.data.restaurants)
       setIsLoading(false)
-
     }
-    setIsLoading(true)
     getRestaurants(props.cityState)
   }, [props.cityState])
 
@@ -60,24 +61,12 @@ export default function Dashboard(props) {
           <option value="fast-food">Recommended</option>
         </select>
       </div>
+      {!isLoading ?
       <div className="grid">
-        {/* Display the restaurants with filter and search term modification */}
-        {/*restaurants
-          .filter(val => {
-            if (searchTerm === '') {
-              return val;
-            } else if (
-              val.name.toLowerCase().includes(searchTerm.toLowerCase())
-            ) {
-              return val;
-            }
-          })
-          .map((restaurant) => {
-            return (
-              <RestaurantCard name={restaurant.name} img={restaurant.img} />
-            );
-          })*/}
-      </div>
+        {restaurants.map(restaurant => {
+          return <RestaurantCard restaurant={restaurant}/>
+        })}
+      </div> : <h1>Loading <Ripple/></h1>}
     </div>
   );
 }

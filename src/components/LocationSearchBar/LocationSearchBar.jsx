@@ -38,7 +38,7 @@ export default function LocationSearchBar({ setAddress = () => { }, cityState, s
 
     return (
         <Combobox onSelect={handleSelect} aria-labelledby="demo">
-            <ComboboxInput value={value} onChange={handleInput} disabled={!ready} placeholder={"Enter an address"} />
+            <ComboboxInput value={value} onChange={handleInput} disabled={!ready} placeholder={"Enter an address"} className="input" />
             <ComboboxPopover>
                 <ComboboxList>
                     {status === "OK" &&
