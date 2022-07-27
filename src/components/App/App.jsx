@@ -100,9 +100,9 @@ function App() {
           }
         />
         {/* The Restauant page where the user can view the restaurant menu it has enter */}
-        <Route path="/restaurant-view" element={<RestaurantView />} />
+        <Route path="/restaurant/:id" element={<RestaurantView />} />
         {/* The Item page where the user can view the food/drink that the restaurant has to offer */}
-        <Route path="/item-view" element={<ItemView/>}/>
+        <Route path="/item/:id" element={<ItemView/>}/>
         {/* The Profile page where the user can view its profile, recent review, and updates its review */}
         <Route
           path="/profile"
