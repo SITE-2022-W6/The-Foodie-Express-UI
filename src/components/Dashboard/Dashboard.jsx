@@ -33,12 +33,13 @@ export default function Dashboard(props) {
     async function getRestaurants(cs, offset)
     {
       setIsLoading(true)
+      // console.log(cs)
       const restaurantlist = await apiClient.getRestaurantsByLocation(cs, offset)
-      console.log(restaurantlist.data.restaurants)
+      // console.log(restaurantlist)
       setRestaurants(restaurantlist.data.restaurants)
       setIsLoading(false)
     }
-    getRestaurants(props.cityState, 1)
+    getRestaurants(props.cityState, 0)
   }, [props.cityState])
 
   restaurants.map(restaurant => {
