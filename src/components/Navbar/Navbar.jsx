@@ -1,4 +1,5 @@
 import * as React from 'react';
+import logo from '../../../public/logo.svg'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BiMap, BiUser } from 'react-icons/bi';
@@ -54,7 +55,7 @@ export default function Navbar(props) {
       <div className="logo">
         {/* Redirects to the dashboard page */}
         <Link to="/dashboard" className="l">
-          <img src="./logo.svg" height="37" />
+          <img src={logo} height="37" />
         </Link>
       </div>
       <div className="links">

@@ -66,6 +66,11 @@ class ApiClient {
     let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}`})
     return response
   }
+
+  async getMenuByOpenMenuId(id) {
+    let response = await this.request({endpoint: `restaurant/search/OM/${id}`})
+    return response
+  }
 }
 
 export default new ApiClient('http://localhost:3001');

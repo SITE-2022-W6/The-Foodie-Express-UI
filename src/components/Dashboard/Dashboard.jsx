@@ -10,11 +10,16 @@ import apiClient from '../../services/apiClient';
 export default function Dashboard(props) {
   {/* useState to find the restaurant with the given search term */}
   const [searchTerm, setSearchTerm] = useState('');
+  const [restType, setRestType] = useState('')
 
   {/* To update the search term useState */}
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  const handleChangeCat = (e) => {
+    setRestType(e.target.value)
+  }
 
   {/* Toggle whether to hide the navbar and/or footer */}
   props.setHideNavbar(false);
@@ -22,6 +27,11 @@ export default function Dashboard(props) {
 
   const [restaurants, setRestaurants] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const restaurantType = new Set();
+
+  restaurants.map(restaurant => {
+    restaurantType.add(restaurant.cuisine_type_primary);
+  })
 
   useEffect(() => {
     async function getRestaurants(cityState)
@@ -49,21 +59,32 @@ export default function Dashboard(props) {
           className="input search-input"
           onChange={handleChange}
         />
-        <select name="food-type">
+        <select name="food-type" onChange={handleChangeCat}>
           <option value="">All</option>
-          <option value="pizza">Pizza</option>
-          <option value="fast-food">Fast Food</option>
-          <option value="bbq">BBQ</option>
+          {Array.from(restaurantType).map(type => {
+            return <option value={type}>{type}</option>
+          })}
         </select>
         <select name="category">
           <option value="nearby">Nearby</option>
-          <option value="pizza">Trending</option>
-          <option value="fast-food">Recommended</option>
+          <option value="recommended">Recommended</option>
         </select>
       </div>
       {!isLoading ?
       <div className="grid">
-        {restaurants.map(restaurant => {
+        {restaurants.filter(cat => {
+        if(restType) {
+          return cat.cuisine_type_primary === restType
+        }
+        return cat
+        })
+        .filter(val => {
+        if (searchTerm === "") {
+          return val
+        } else if (val.restaurant_name.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return val
+        }
+        }).map(restaurant => {
           return <RestaurantCard restaurant={restaurant}/>
         })}
       </div> : <h1>Loading <Ripple/></h1>}
