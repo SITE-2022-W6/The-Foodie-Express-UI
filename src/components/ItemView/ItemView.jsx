@@ -1,21 +1,38 @@
 import React from 'react';
 import Modal from '../Modal/Modal';
 import Rating from 'react-rating';
-import { useState } from 'react';
+import apiClient from '../../services/apiClient';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import './ItemView.css';
 
 export default function ItemView() {
   {/* The useState for toggling modal popup */}
   const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [item, setItem] = useState({});
+  const {restaurantId, itemName} = useParams('')
+
+  useEffect(() => {
+    async function getItem(r, i) {
+      setIsLoading(true);
+      const itemInfo = await apiClient.getMenuItem(r, i);
+      setItem(itemInfo.data.item);
+      console.log(item);
+      setIsLoading(false);
+    }
+    console.log(restaurantId)
+    console.log(itemName)
+    getItem(restaurantId, itemName)
+  }, [restaurantId, itemName]);
 
   return (
     <div className="center">
       <div className="item-view">
         {/* The heading of item */}
-        <h1>Food Name</h1>
-        <h2>Restaurant Name</h2>
-        <p>Food Discription</p>
+        <h1>{item.name}</h1>
+        <h3>{item.group_name}</h3>
+        <p>{item.description}</p>
         <Rating fractions={2} readonly/>
         <div className="address-modal">
           {/* A button to add a review via modal popup */}

@@ -29,21 +29,21 @@ export default function Dashboard(props) {
   const [isLoading, setIsLoading] = useState(true)
   const restaurantType = new Set();
 
-  restaurants.map(restaurant => {
-    restaurantType.add(restaurant.cuisine_type_primary);
-  })
-
   useEffect(() => {
-    async function getRestaurants(cityState)
+    async function getRestaurants(cs, offset)
     {
       setIsLoading(true)
-      const restaurantlist = await apiClient.getRestaurantsByLocation(cityState)
+      const restaurantlist = await apiClient.getRestaurantsByLocation(cs, offset)
       console.log(restaurantlist.data.restaurants)
       setRestaurants(restaurantlist.data.restaurants)
       setIsLoading(false)
     }
-    getRestaurants(props.cityState)
+    getRestaurants(props.cityState, 1)
   }, [props.cityState])
+
+  restaurants.map(restaurant => {
+    restaurantType.add(restaurant.cuisine_type_primary);
+  })
 
   return (
     <div className="dashboard">

@@ -27,7 +27,11 @@
   margin: 1em;
 }
 
-.restaurant-view .description {
+.restaurant-view .title {
+  font-weight: bold;
+}
+
+.restaurant-view .title, .restaurant-view .description {
   max-width: 300px;
 }
 

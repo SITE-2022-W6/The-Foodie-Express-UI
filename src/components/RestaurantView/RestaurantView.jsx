@@ -3,6 +3,7 @@ import apiClient from '../../services/apiClient';
 import { Ripple } from 'react-spinners-css';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Link as ScrollTo } from 'react-scroll';
 import Rating from 'react-rating';
 import data from '../banner.json';
@@ -51,20 +52,23 @@ export default function RestaurantView() {
           {restaurantInfo.phone && <p>Phone: {restaurantInfo.phone}</p>}
         </div>
         <div className="menu">
-          {menu.map(m => {
+          {menu.map((m, index) => {
+            let menuId = index;
             return (
-              <div>
+              <div key={index}>
                 <h1>{m.menu_name}</h1>
-                {m.menu_groups.map(group => {
+                {m.menu_groups.map((group, index) => {
+                  let groupId = index;
                   return (
-                    <div id={group.group_name}>
+                    <div id={group.group_name} key={index}>
                       <h2>{group.group_name}</h2>
-                      {group.menu_items.map(item => {
+                      {group.menu_items.map((item, index) =>{
                         return (
-                          <div className="item">
-                            <p style={{fontWeight: 'bold'}}>{item.menu_item_name}</p>
-                            {item.menu_item_description ? <p className="description">{item.menu_item_description}</p> : null}
-                            
+                          <div className="item" key={index}>
+                            <Link to={`/item/${id}/${item.menu_item_name}`} style={{textDecoration: 'none', color: '#000000'}}>
+                              <p className="title">{item.menu_item_name}</p>
+                              {item.menu_item_description ? <p className="description">{item.menu_item_description}</p> : null}
+                            </Link>
                           </div>
                         )
                       })}

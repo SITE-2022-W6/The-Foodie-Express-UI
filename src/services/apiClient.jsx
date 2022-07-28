@@ -61,14 +61,19 @@ class ApiClient {
     localStorage.removeItem(this.tokenName);
   }
 
-  async getRestaurantsByLocation(cityState)
+  async getRestaurantsByLocation(cityState, offset)
   {
-    let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}`})
+    let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}/${offset}`})
     return response
   }
 
   async getMenuByOpenMenuId(id) {
     let response = await this.request({endpoint: `restaurant/search/OM/${id}`})
+    return response
+  }
+
+  async getMenuItem(restaurantId, itemName) {
+    let response = await this.request({endpoint: `menu/${restaurantId}/${itemName}`})
     return response
   }
 }
