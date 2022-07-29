@@ -11,6 +11,7 @@ export default function Dashboard(props) {
   {/* useState to find the restaurant with the given search term */}
   const [searchTerm, setSearchTerm] = useState('');
   const [restType, setRestType] = useState('')
+  const [offset, setOffset] = useState(0)
 
   {/* To update the search term useState */}
   const handleChange = (e) => {
@@ -19,6 +20,14 @@ export default function Dashboard(props) {
 
   const handleChangeCat = (e) => {
     setRestType(e.target.value)
+  }
+
+  async function loadMore()
+  {
+    setOffset(offset+1)
+    const restaurantlist = await apiClient.getRestaurantsByLocation(props.cityState, offset+1)
+    setRestaurants([...restaurants, ...restaurantlist.data.restaurants])
+
   }
 
   {/* Toggle whether to hide the navbar and/or footer */}
@@ -30,16 +39,17 @@ export default function Dashboard(props) {
   const restaurantType = new Set();
 
   useEffect(() => {
-    async function getRestaurants(cs, offset)
+    async function getRestaurants(cs)
     {
+      setOffset(0)
       setIsLoading(true)
       // console.log(cs)
-      const restaurantlist = await apiClient.getRestaurantsByLocation(cs, offset)
+      const restaurantlist = await apiClient.getRestaurantsByLocation(cs, 0)
       // console.log(restaurantlist)
       setRestaurants(restaurantlist.data.restaurants)
       setIsLoading(false)
     }
-    getRestaurants(props.cityState, 0)
+    getRestaurants(props.cityState)
   }, [props.cityState])
 
   restaurants.map(restaurant => {
@@ -89,6 +99,7 @@ export default function Dashboard(props) {
           return <RestaurantCard restaurant={restaurant}/>
         })}
       </div> : <h1>Loading <Ripple/></h1>}
+      <button onClick={() => {loadMore()}}>Load More</button>
     </div>
   );
 }
