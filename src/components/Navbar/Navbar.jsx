@@ -1,6 +1,6 @@
 import * as React from 'react';
 import logo from '../../../public/logo.svg'
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BiMap, BiUser } from 'react-icons/bi';
 import Modal from '../Modal/Modal';
@@ -50,6 +50,20 @@ export default function Navbar(props) {
     navigate('/dashboard');
   }
 
+  let dropdownRef = useRef()
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!dropdownRef.current.contains(e.target)) {
+        setDropdown(false)
+      }
+    }
+    document.addEventListener("mousedown", handler)
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+  })
+
   return (
     <div className="navbar">
       <div className="logo">
@@ -90,7 +104,7 @@ export default function Navbar(props) {
         <div className="dropdown">
           {/* Toggles the dropdown menu when the user clicks on the profile icon */}
           <button id="myDropdown" className="dropdown-btn" onClick={toggleDropdown}><BiUser size={21} color="#00000080"/></button>
-          {dropdown ? <div className="dropdown-content">
+          {dropdown ? <div className="dropdown-content" ref={dropdownRef}>
             <button className="link" onClick={() => navigate('/profile')}>Profile</button>
             <button className="link" onClick={logUserOut}>Log Out</button>
           </div> : null}

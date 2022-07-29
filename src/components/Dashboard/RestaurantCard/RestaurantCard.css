@@ -1,5 +1,5 @@
 .restaurant-card {
-  display: inline-block;
+  display: inline-flex;
   background: #ffffff;
   border-radius: 1em;
 }

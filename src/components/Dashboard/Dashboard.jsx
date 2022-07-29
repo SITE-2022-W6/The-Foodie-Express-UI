@@ -27,7 +27,6 @@ export default function Dashboard(props) {
     setOffset(offset+1)
     const restaurantlist = await apiClient.getRestaurantsByLocation(props.cityState, offset+1)
     setRestaurants([...restaurants, ...restaurantlist.data.restaurants])
-
   }
 
   {/* Toggle whether to hide the navbar and/or footer */}
@@ -55,6 +54,8 @@ export default function Dashboard(props) {
   restaurants.map(restaurant => {
     restaurantType.add(restaurant.cuisine_type_primary);
   })
+
+  console.log(restaurants)
 
   return (
     <div className="dashboard">

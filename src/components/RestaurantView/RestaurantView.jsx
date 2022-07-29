@@ -14,25 +14,25 @@ export default function RestaurantView() {
   // The JSON variable from the api to display the menu from the given restaurant id
 
   const [restaurantInfo, setRestaurantsInfo] = useState([])
+  const [cuisine, setCuisine] = useState('')
   const [menu, setMenu] = useState([])
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+
+  const banner = new Map(Object.entries(data));
 
   useEffect(() => {
     async function getMenu(menuId) {
       setIsLoading(true);
       const menuList = await apiClient.getMenuByOpenMenuId(menuId);
-      console.log(menuList.data.menu)
+      console.log(menuList);
       setRestaurantsInfo(menuList.data.menu.restaurant_info)
+      setCuisine(menuList.data.menu.environment_info.cuisine_type_primary)
       setMenu(menuList.data.menu.menu)
-      console.log(menuList.data.menu)
       setIsLoading(false);
     }
     getMenu(id);
   }, [id]);
-
-  console.log(restaurantInfo)
-  console.log(menu)
 
   return (
     <div className="grid">
@@ -40,7 +40,7 @@ export default function RestaurantView() {
         {/* Restauant Header */}
         <div className="banner">
           <img
-            src="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
+            src={banner.has(cuisine) ? banner.get(cuisine) : './banner.png'}
             className="banner"
           />
         </div>
