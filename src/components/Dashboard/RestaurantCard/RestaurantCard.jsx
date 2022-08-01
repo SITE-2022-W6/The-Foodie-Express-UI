@@ -9,7 +9,6 @@ export default function RestaurantCard(props) {
   const banner = new Map(Object.entries(data));
 
   const getBanner = (data) => {
-    console.log(props.restaurant.restaurant_name, data)
     if (banner.has(data)) {
       return banner.get(data)
     } else {
