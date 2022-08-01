@@ -35,7 +35,7 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       window.localStorage.setItem('user_info', JSON.stringify(userInfo))
-      window.localStorage.setItem('is_authenticated', String(isAuthenticated))
+      window.localStorage.setItem('is_authenticated', String(isAuthenticated))      
     }
   })
 
