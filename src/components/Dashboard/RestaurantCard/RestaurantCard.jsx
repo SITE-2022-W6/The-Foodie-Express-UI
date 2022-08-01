@@ -7,6 +7,7 @@ import './RestaurantCard.css';
 
 export default function RestaurantCard(props) {
   const banner = new Map(Object.entries(data));
+
   const getBanner = (data) => {
     if (banner.has(data)) {
       return banner.get(data)
@@ -18,6 +19,7 @@ export default function RestaurantCard(props) {
       return './banner.svg'
     }
   }
+
   //To calculate distances with Google API
   const service = new google.maps.DistanceMatrixService()
   const restaurantAddress = props.restaurant?.address_1 + "," + props.restaurant?.city_town + "," + props.restaurant?.state_province + "," + props.restaurant?.postal_code
@@ -59,6 +61,7 @@ export default function RestaurantCard(props) {
           <div className="info">
             <h2 className="title">{props.restaurant.restaurant_name}</h2>
             <p className="address">{props.restaurant.address_1}</p>
+
             <Rating
               placeholderRating={3.5}
               fractions={2}
@@ -67,6 +70,7 @@ export default function RestaurantCard(props) {
               fullSymbol={<BsStarFill size={20}/>}
               readonly
             />
+
             <p className="distance">{distance}</p>
           </div>
         </Link>
