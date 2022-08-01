@@ -22,8 +22,8 @@ function App() {
   const [userInfo, setUserInfo] = useState({});
   const [footer, setFooter] = useState(true);
 
-  console.log(userInfo)
-  console.log(isAuthenticated)
+  // console.log(userInfo)
+  // console.log(isAuthenticated)
 
   useEffect(() => {
     const user_info = window.localStorage.getItem('user_info')
