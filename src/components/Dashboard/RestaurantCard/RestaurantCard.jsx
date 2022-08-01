@@ -9,6 +9,7 @@ export default function RestaurantCard(props) {
   const banner = new Map(Object.entries(data));
 
   const getBanner = (data) => {
+    console.log(props.restaurant.restaurant_name, data)
     if (banner.has(data)) {
       return banner.get(data)
     } else {
@@ -22,12 +23,12 @@ export default function RestaurantCard(props) {
 
   //To calculate distances with Google API
   const service = new google.maps.DistanceMatrixService()
-  const restaurantAddress = props.restaurant?.address_1 + "," + props.restaurant?.city_town + "," + props.restaurant?.state_province + "," + props.restaurant?.postal_code
   const [distance, setDistance] = React.useState("")
   const [gotDistance, setGotDistance] = React.useState(false)
 
   async function calculateDistance()
   {
+    const restaurantAddress = props.restaurant?.address_1 + "," + props.restaurant?.city_town + "," + props.restaurant?.state_province + "," + props.restaurant?.postal_code
     service.getDistanceMatrix(
       {
         origins: [props.address],
@@ -52,7 +53,10 @@ export default function RestaurantCard(props) {
     )
   }
 
-  calculateDistance()
+  React.useEffect(() => {
+    calculateDistance()
+  }, [])
+  
 
   return (
       <> {gotDistance && <div className="restaurant-card" key={props.restaurant.id}>
