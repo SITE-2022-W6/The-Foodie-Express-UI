@@ -48,7 +48,7 @@ export default function Navbar(props) {
 
   useEffect(() => {
     let handler = (e) => {
-      if (!dropdownRef.current.contains(e.target)) {
+      if (!dropdownRef.current?.contains(e.target)) {
         setDropdown(false)
       }
     }

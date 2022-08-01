@@ -7,9 +7,7 @@ import './Dashboard.css';
 import apiClient from '../../services/apiClient';
 
 export default function Dashboard(props) {
-  {
-    /* useState to find the restaurant with the given search term */
-  }
+  /* useState to find the restaurant with the given search term */
   const [searchTerm, setSearchTerm] = useState('');
   const [restType, setRestType] = useState('')
   const [restaurants, setRestaurants] = useState([])
@@ -17,9 +15,7 @@ export default function Dashboard(props) {
   const restaurantType = new Set();
   const [offset, setOffset] = useState(0)
 
-  {
-    /* To update the search term useState */
-  }
+  //To update the search term useState
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -28,6 +24,7 @@ export default function Dashboard(props) {
     setRestType(e.target.value);
   };
 
+  //Loads more restaurants
   async function loadMore() {
     setOffset(offset + 1);
     const restaurantlist = await apiClient.getRestaurantsByLocation(
@@ -37,11 +34,7 @@ export default function Dashboard(props) {
     setRestaurants([...restaurants, ...restaurantlist.data.restaurants]);
   }
 
-  //Loads more restaurants
-  async function loadMore()
-  {
-    /* Toggle whether to hide the navbar and/or footer */
-  }
+  //Toggle whether to hide the navbar and/or footer
   props.setHideNavbar(false);
   props.setFooter(true);
 
