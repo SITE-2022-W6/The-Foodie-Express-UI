@@ -25,7 +25,7 @@ export default function RestaurantView() {
     async function getMenu(menuId) {
       setIsLoading(true);
       const menuList = await apiClient.getMenuByOpenMenuId(menuId);
-      console.log(menuList);
+      //console.log(menuList);
       setRestaurantsInfo(menuList.data.menu.restaurant_info)
       setCuisine(menuList.data.menu.environment_info.cuisine_type_primary)
       setMenu(menuList.data.menu.menu)
@@ -55,16 +55,17 @@ export default function RestaurantView() {
           {menu.map((m, index) => {
             let menuId = index;
             return (
-              <div key={index}>
+              <div key={menuId}>
                 <h1>{m.menu_name}</h1>
                 {m.menu_groups.map((group, index) => {
                   let groupId = index;
                   return (
-                    <div id={group.group_name} key={index}>
+                    <div id={group.group_name} key={groupId}>
                       <h2>{group.group_name}</h2>
                       {group.menu_items.map((item, index) =>{
+                        let itemId = index;
                         return (
-                          <div className="item" key={index}>
+                          <div className="item" key={itemId}>
                             <Link to={`/item/${id}/${item.menu_item_name}`} style={{textDecoration: 'none', color: '#000000'}}>
                               <p className="title">{item.menu_item_name}</p>
                               {item.menu_item_description ? <p className="description">{item.menu_item_description}</p> : null}

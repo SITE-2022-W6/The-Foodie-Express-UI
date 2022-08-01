@@ -18,11 +18,11 @@ export default function ItemView() {
       setIsLoading(true);
       const itemInfo = await apiClient.getMenuItem(r, i);
       setItem(itemInfo.data.item);
-      console.log(item);
+      // console.log(item);
       setIsLoading(false);
     }
-    console.log(restaurantId)
-    console.log(itemName)
+    // console.log(restaurantId)
+    // console.log(itemName)
     getItem(restaurantId, itemName)
   }, [restaurantId, itemName]);
 

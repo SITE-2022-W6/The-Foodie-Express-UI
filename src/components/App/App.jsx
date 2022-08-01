@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../Navbar/Navbar';
 import Landing from '../Landing/Landing';
 import Login from '../Login/Login';
@@ -19,14 +19,25 @@ function App() {
   const [address, setAddress] = useState('');
   const [cityState, setCityState] = useState(null)
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    id: 0,
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-  });
+  const [userInfo, setUserInfo] = useState({});
   const [footer, setFooter] = useState(true);
+
+  console.log(userInfo)
+  console.log(isAuthenticated)
+
+  useEffect(() => {
+    const user_info = window.localStorage.getItem('user_info')
+    const is_authenticated = window.localStorage.getItem('is_authenticated')
+    setUserInfo(JSON.parse(user_info))
+    setIsAuthenticated((is_authenticated === 'true'))
+  }, [])
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      window.localStorage.setItem('user_info', JSON.stringify(userInfo))
+      window.localStorage.setItem('is_authenticated', String(isAuthenticated))
+    }
+  })
 
   return (
     <div className="app">

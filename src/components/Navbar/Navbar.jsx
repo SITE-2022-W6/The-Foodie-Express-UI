@@ -38,13 +38,7 @@ export default function Navbar(props) {
   
   {/* Log out the user and redirect the dashboard if the use is on different page */}
   const logUserOut = () => {
-    props.setUserInfo({
-      id: 0,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-    });
+    props.setUserInfo({});
     apiClient.logoutUser();
     props.setIsAuthenticated(false);
     navigate('/dashboard');

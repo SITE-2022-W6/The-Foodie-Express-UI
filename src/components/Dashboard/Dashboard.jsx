@@ -55,7 +55,7 @@ export default function Dashboard(props) {
     restaurantType.add(restaurant.cuisine_type_primary);
   })
 
-  console.log(restaurants)
+  // console.log(restaurants)
 
   return (
     <div className="dashboard">
