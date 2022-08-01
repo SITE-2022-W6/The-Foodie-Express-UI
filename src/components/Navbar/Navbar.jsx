@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { useState } from 'react';
+import logo from '../../../public/logo.svg'
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { BiMap, BiUser } from 'react-icons/bi';
 import Modal from '../Modal/Modal';
@@ -37,24 +38,32 @@ export default function Navbar(props) {
   
   {/* Log out the user and redirect the dashboard if the use is on different page */}
   const logUserOut = () => {
-    props.setUserInfo({
-      id: 0,
-      firstName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-    });
+    props.setUserInfo({});
     apiClient.logoutUser();
     props.setIsAuthenticated(false);
     navigate('/dashboard');
   }
+
+  let dropdownRef = useRef()
+
+  useEffect(() => {
+    let handler = (e) => {
+      if (!dropdownRef.current.contains(e.target)) {
+        setDropdown(false)
+      }
+    }
+    document.addEventListener("mousedown", handler)
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+  })
 
   return (
     <div className="navbar">
       <div className="logo">
         {/* Redirects to the dashboard page */}
         <Link to="/dashboard" className="l">
-          <img src="./logo.svg" height="37" />
+          <img src={logo} height="37" />
         </Link>
       </div>
       <div className="links">
@@ -89,7 +98,7 @@ export default function Navbar(props) {
         <div className="dropdown">
           {/* Toggles the dropdown menu when the user clicks on the profile icon */}
           <button id="myDropdown" className="dropdown-btn" onClick={toggleDropdown}><BiUser size={21} color="#00000080"/></button>
-          {dropdown ? <div className="dropdown-content">
+          {dropdown ? <div className="dropdown-content" ref={dropdownRef}>
             <button className="link" onClick={() => navigate('/profile')}>Profile</button>
             <button className="link" onClick={logUserOut}>Log Out</button>
           </div> : null}

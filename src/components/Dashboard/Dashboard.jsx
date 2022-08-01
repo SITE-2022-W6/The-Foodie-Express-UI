@@ -10,11 +10,24 @@ import apiClient from '../../services/apiClient';
 export default function Dashboard(props) {
   {/* useState to find the restaurant with the given search term */}
   const [searchTerm, setSearchTerm] = useState('');
+  const [restType, setRestType] = useState('')
+  const [offset, setOffset] = useState(0)
 
   {/* To update the search term useState */}
   const handleChange = (e) => {
     setSearchTerm(e.target.value);
   };
+
+  const handleChangeCat = (e) => {
+    setRestType(e.target.value)
+  }
+
+  async function loadMore()
+  {
+    setOffset(offset+1)
+    const restaurantlist = await apiClient.getRestaurantsByLocation(props.cityState, offset+1)
+    setRestaurants([...restaurants, ...restaurantlist.data.restaurants])
+  }
 
   {/* Toggle whether to hide the navbar and/or footer */}
   props.setHideNavbar(false);
@@ -22,18 +35,27 @@ export default function Dashboard(props) {
 
   const [restaurants, setRestaurants] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const restaurantType = new Set();
 
   useEffect(() => {
-    async function getRestaurants(cityState)
+    async function getRestaurants(cs)
     {
+      setOffset(0)
       setIsLoading(true)
-      const restaurantlist = await apiClient.getRestaurantsByLocation(cityState)
-      console.log(restaurantlist.data.restaurants)
+      // console.log(cs)
+      const restaurantlist = await apiClient.getRestaurantsByLocation(cs, 0)
+      // console.log(restaurantlist)
       setRestaurants(restaurantlist.data.restaurants)
       setIsLoading(false)
     }
     getRestaurants(props.cityState)
   }, [props.cityState])
+
+  restaurants.map(restaurant => {
+    restaurantType.add(restaurant.cuisine_type_primary);
+  })
+
+  // console.log(restaurants)
 
   return (
     <div className="dashboard">
@@ -49,24 +71,36 @@ export default function Dashboard(props) {
           className="input search-input"
           onChange={handleChange}
         />
-        <select name="food-type">
+        <select name="food-type" onChange={handleChangeCat}>
           <option value="">All</option>
-          <option value="pizza">Pizza</option>
-          <option value="fast-food">Fast Food</option>
-          <option value="bbq">BBQ</option>
+          {Array.from(restaurantType).map(type => {
+            return <option value={type}>{type}</option>
+          })}
         </select>
         <select name="category">
           <option value="nearby">Nearby</option>
-          <option value="pizza">Trending</option>
-          <option value="fast-food">Recommended</option>
+          <option value="recommended">Recommended</option>
         </select>
       </div>
       {!isLoading ?
       <div className="grid">
-        {restaurants.map(restaurant => {
+        {restaurants.filter(cat => {
+        if(restType) {
+          return cat.cuisine_type_primary === restType
+        }
+        return cat
+        })
+        .filter(val => {
+        if (searchTerm === "") {
+          return val
+        } else if (val.restaurant_name.toLowerCase().includes(searchTerm.toLowerCase())) {
+          return val
+        }
+        }).map(restaurant => {
           return <RestaurantCard restaurant={restaurant}/>
         })}
       </div> : <h1>Loading <Ripple/></h1>}
+      <button onClick={() => {loadMore()}}>Load More</button>
     </div>
   );
 }

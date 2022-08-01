@@ -31,8 +31,7 @@
 .dashboard .grid {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   margin: 2em auto;
   flex-wrap: wrap;
-  gap: 2em;
 }
