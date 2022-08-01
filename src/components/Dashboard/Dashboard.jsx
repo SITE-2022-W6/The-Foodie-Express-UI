@@ -11,6 +11,9 @@ export default function Dashboard(props) {
   {/* useState to find the restaurant with the given search term */}
   const [searchTerm, setSearchTerm] = useState('');
   const [restType, setRestType] = useState('')
+  const [restaurants, setRestaurants] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+  const restaurantType = new Set();
   const [offset, setOffset] = useState(0)
 
   {/* To update the search term useState */}
@@ -22,6 +25,7 @@ export default function Dashboard(props) {
     setRestType(e.target.value)
   }
 
+  //Loads more restaurants
   async function loadMore()
   {
     setOffset(offset+1)
@@ -32,10 +36,6 @@ export default function Dashboard(props) {
   {/* Toggle whether to hide the navbar and/or footer */}
   props.setHideNavbar(false);
   props.setFooter(true);
-
-  const [restaurants, setRestaurants] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
-  const restaurantType = new Set();
 
   useEffect(() => {
     async function getRestaurants(cs)
@@ -61,7 +61,7 @@ export default function Dashboard(props) {
     <div className="dashboard">
       <h1>
         {/* Welcoming user who log on or not logged in */}
-        Hi {props.userInfo.firstName ? props.userInfo.firstName : 'Stranger'},
+        Hi {props.userInfo?.firstName ? props.userInfo.firstName : 'Stranger'},
         looks like you'll find the best food to eat
       </h1>
       <div className="filter-session">
@@ -97,7 +97,7 @@ export default function Dashboard(props) {
           return val
         }
         }).map(restaurant => {
-          return <RestaurantCard restaurant={restaurant}/>
+          return <RestaurantCard restaurant={restaurant} address={props.address}/>
         })}
       </div> : <h1>Loading <Ripple/></h1>}
       <button onClick={() => {loadMore()}}>Load More</button>
