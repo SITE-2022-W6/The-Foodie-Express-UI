@@ -61,21 +61,35 @@ class ApiClient {
     localStorage.removeItem(this.tokenName);
   }
 
-  async getRestaurantsByLocation(cityState, offset)
-  {
+  async getRestaurantsByLocation(cityState, offset) {
     // console.log(cityState)
-    let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}/${offset}`})
-    return response
+    let response = await this.request({
+      endpoint: `restaurant/location/${cityState.state}/${cityState.city}/${offset}`,
+    });
+    return response;
   }
 
   async getMenuByOpenMenuId(id) {
-    let response = await this.request({endpoint: `restaurant/search/OM/${id}`})
-    return response
+    let response = await this.request({
+      endpoint: `restaurant/search/OM/${id}`,
+    });
+    return response;
   }
 
   async getMenuItem(restaurantId, itemName) {
-    let response = await this.request({endpoint: `menu/${restaurantId}/${itemName}`})
-    return response
+    let response = await this.request({
+      endpoint: `menu/${restaurantId}/${itemName}`,
+    });
+    return response;
+  }
+
+  async createReview(review) {
+    let response = await this.request({
+      endpoint: '/create-review',
+      method: 'POST',
+      data: review,
+    });
+    return response;
   }
 }
 

@@ -91,10 +91,11 @@
   text-align: center;
 }
 
-.register .loading {
+.register .signing-up {
   display: flex;
   gap: 5px;
   pointer-events: none;
+  flex-direction: row;
 }
 
 .register .text-link {

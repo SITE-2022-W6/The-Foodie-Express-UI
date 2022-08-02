@@ -79,10 +79,11 @@
   text-align: center;
 }
 
-.login .loading {
+.login .logging-in {
   display: flex;
   gap: 5px;
   pointer-events: none;
+  flex-direction: row;
 }
 
 .login .text-link {

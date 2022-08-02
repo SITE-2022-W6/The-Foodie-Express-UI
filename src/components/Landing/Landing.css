@@ -50,13 +50,9 @@
   color: #ffffff;
 }
 
-.landing .info .address-input {
-  border: 1px solid #00000080;
-  width: 250px;
-}
-
-.landing .info .form .credit {
+.landing .credit {
   text-align: center;
+  font-size: 0.8em;
   position: absolute;
   left: 50%;
   bottom: 0px;

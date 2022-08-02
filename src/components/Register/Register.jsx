@@ -165,7 +165,7 @@ export default function Register(props) {
               Sign Up
             </button>
           ) : (
-            <button className="btn signup-btn loading" disabled>
+            <button className="btn signup-btn signing-up" disabled>
               <div style={{ margin: '0' }}>Signing Up</div>
               <Ripple color="#ffffff" size={21} />
             </button>

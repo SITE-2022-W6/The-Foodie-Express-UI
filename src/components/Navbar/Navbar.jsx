@@ -40,6 +40,8 @@ export default function Navbar(props) {
   const logUserOut = () => {
     props.setUserInfo({});
     apiClient.logoutUser();
+    window.localStorage.removeItem('user_info')
+    window.localStorage.removeItem('is_authenticated')
     props.setIsAuthenticated(false);
     navigate('/dashboard');
   }
