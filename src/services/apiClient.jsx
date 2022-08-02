@@ -25,8 +25,7 @@ class ApiClient {
 
     try {
       const res = await axios({ url, method, data, headers });
-      console.log(res)
-      return { data: res.data, error: null };
+      return { data: res.data, status:res.status, error: null };
     } catch (error) {
       console.error({ errorResponse: error.response });
       const message = error?.response?.data?.error?.message;
@@ -66,6 +65,7 @@ class ApiClient {
   {
     // console.log(cityState)
     let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}/${offset}`})
+    console.log(response)
     return response
   }
 

@@ -12,6 +12,7 @@ export default function Dashboard(props) {
   const [searchTerm, setSearchTerm] = useState('');
   const [restType, setRestType] = useState('')
   const [restaurants, setRestaurants] = useState([])
+  const [statusCode, setStatusCode] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const restaurantType = new Set();
   const [offset, setOffset] = useState(0)
@@ -46,14 +47,19 @@ export default function Dashboard(props) {
       const restaurantlist = await apiClient.getRestaurantsByLocation(cs, 0)
       // console.log(restaurantlist)
       setRestaurants(restaurantlist.data.restaurants)
+      setStatusCode(restaurantlist.status)
       setIsLoading(false)
     }
     getRestaurants(props.cityState)
   }, [props.cityState])
 
-  restaurants.map(restaurant => {
+  if(statusCode == 200)
+  {
+    restaurants.map(restaurant => {
     restaurantType.add(restaurant.cuisine_type_primary);
   })
+  }
+  
 
   // console.log(restaurants)
 
@@ -82,7 +88,7 @@ export default function Dashboard(props) {
           <option value="recommended">Recommended</option>
         </select>
       </div>
-      {!isLoading ?
+      {(!isLoading && statusCode == 200) ?
       <div className="grid">
         {restaurants.filter(cat => {
         if(restType) {
@@ -99,7 +105,7 @@ export default function Dashboard(props) {
         }).map(restaurant => {
           return <RestaurantCard restaurant={restaurant} address={props.address}/>
         })}
-      </div> : <h1>Loading <Ripple/></h1>}
+      </div> : (!isLoading && statusCode == 204) ? <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1> : <h1>Loading <Ripple/></h1>}
       <button onClick={() => {loadMore()}}>Load More</button>
     </div>
   );
