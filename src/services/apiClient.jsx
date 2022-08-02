@@ -65,7 +65,6 @@ class ApiClient {
   {
     // console.log(cityState)
     let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}/${offset}`})
-    console.log(response)
     return response
   }
 
