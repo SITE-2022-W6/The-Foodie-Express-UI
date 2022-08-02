@@ -3,6 +3,7 @@ import Modal from '../Modal/Modal';
 import Rating from 'react-rating';
 import apiClient from '../../services/apiClient';
 import { useState, useEffect } from 'react';
+import { BsStar, BsStarFill } from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 import './ItemView.css';
 
@@ -33,7 +34,14 @@ export default function ItemView() {
         <h1>{item.name}</h1>
         <h3>{item.group_name}</h3>
         <p>{item.description}</p>
-        <Rating fractions={2} readonly/>
+        <Rating
+          placeholderRating={3.5}
+          fractions={2}
+          placeholderSymbol={<BsStarFill size={20}/>}
+          emptySymbol={<BsStar size={20}/>}
+          fullSymbol={<BsStarFill size={20}/>}
+          readonly
+        />
         <div className="address-modal">
           {/* A button to add a review via modal popup */}
           <button className="btn" onClick={() => setIsOpen(true)}>Add Review</button>
@@ -62,12 +70,20 @@ export function Review(props) {
     <div className="review">
       <div className="header">
         <h3>User Name</h3>
-        <Rating fractions={2} readonly/>
+        <Rating
+          placeholderRating={3.5}
+          fractions={2}
+          placeholderSymbol={<BsStarFill size={20}/>}
+          emptySymbol={<BsStar size={20}/>}
+          fullSymbol={<BsStarFill size={20}/>}
+          readonly
+        />
         <p>Date:</p>
       </div>
       <div className="content">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
       </div>
+      <hr/>
     </div>
   )
 }

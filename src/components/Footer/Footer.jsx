@@ -1,4 +1,5 @@
 import React from 'react';
+import footerIcon from '../../../public/footerIcon.svg'
 import { BsFacebook, BsTwitter, BsInstagram, BsLinkedin} from 'react-icons/bs';
 import './Footer.css';
 
@@ -9,11 +10,11 @@ export default function Footer() {
         <div className="about-us">
           <h1 className="head">About Us</h1>
           {/* The Foodie Express mission */}
-          <p className="pg">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <p className="pg">The Foodies Express is a website to help you find restaurants and dishes for you to enjoy, or share your opinions about dishes you have tasted. Created by Winson Chen, Andy Cordero, and Steven Salto.</p>
         </div>
         <div className="social-media">
           {/* Display the social media */}
-          <h1 className="head">Social Media</h1>
+          <h1 className="head">Follow Us On</h1>
           <div className="icons">
             <BsFacebook size="30px"/>
             <BsTwitter size="30px"/>
@@ -24,7 +25,8 @@ export default function Footer() {
       </div>
       <div className="copyright">
         {/* Copyright of The Foodie Express */}
-        <p>&copy; 2022 The Foodie Express, Inc. All rights reserved.</p>
+        <img src={footerIcon} height="50" style={{marginTop: "1em"}}/>
+        <p style={{margin: "0.5em 0"}}>&copy; 2022 The Foodie Express, Inc.</p>
       </div>
     </div>
   )
