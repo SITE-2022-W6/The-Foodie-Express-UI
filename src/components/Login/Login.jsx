@@ -30,7 +30,6 @@ export default function Login(props) {
       setError(error);
     }
     if (data?.user) {
-      console.log(data)
       props.setIsAuthenticated(true);
       apiClient.setToken(data.token);
       props.setUserInfo({
