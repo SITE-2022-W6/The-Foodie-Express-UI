@@ -33,6 +33,7 @@ class ApiClient {
     }
   }
 
+  //Logs user in
   async loginUser(credentials) {
     let response = await this.request({
       endpoint: 'auth/login',
@@ -42,6 +43,7 @@ class ApiClient {
     return response;
   }
 
+  //Signs user up
   async signupUser(credentials) {
     let response = await this.request({
       endpoint: 'auth/register',
@@ -51,30 +53,36 @@ class ApiClient {
     return response;
   }
 
+  //Fetch user data from JWT token
   async fetchUserFromToken() {
     let response = await this.request({ endpoint: 'auth/me', method: 'GET' });
     return response;
   }
 
+  //Logs user out
   async logoutUser() {
     this.setToken(null);
     localStorage.removeItem(this.tokenName);
   }
 
+  //Gets retaurant list by city and state
+  //Offset controls which page of results to get
   async getRestaurantsByLocation(cityState, offset)
   {
     // console.log(cityState)
-    let response = await this.request({endpoint: `restaurant/location/${cityState.state}/${cityState.city}/${offset}`})
+    let response = await this.request({endpoint: `restaurant/location?state=${cityState.state}&city=${cityState.city}&offset=${offset}`})
     return response
   }
 
+  //Gets menu of a restuarant from its OpenMenuId
   async getMenuByOpenMenuId(id) {
-    let response = await this.request({endpoint: `restaurant/search/OM/${id}`})
+    let response = await this.request({endpoint: `restaurant/search?OMId=${id}`})
     return response
   }
 
+  //Gets details about a specific menu item
   async getMenuItem(restaurantId, itemName) {
-    let response = await this.request({endpoint: `menu/${restaurantId}/${itemName}`})
+    let response = await this.request({endpoint: `menu/item?restaurantId=${restaurantId}&itemName=${itemName}`})
     return response
   }
 }

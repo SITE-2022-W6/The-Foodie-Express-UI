@@ -106,7 +106,7 @@ export default function Dashboard(props) {
           return <RestaurantCard restaurant={restaurant} address={props.address}/>
         })}
 
-      </div> : (!isLoading && statusCode == 204) ? <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1> : <h1>Loading <Ripple/></h1>}
+      </div> : (!isLoading && statusCode == 204) ? <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1> : <Loading />}
 
       <button onClick={() => {loadMore()}}>Load More</button>
     </div>
