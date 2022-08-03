@@ -77,7 +77,7 @@ export default function Dashboard(props) {
   // console.log(restaurants)
 
   return (
-    <div className="dashboard">
+    <div className="dashboard navbar-margin-top">
       {!props.address && <Navigate to="/" />}
       <h1 style={{ fontSize: '3em' }}>
         {/* Welcoming user who log on or not logged in */}
@@ -90,7 +90,7 @@ export default function Dashboard(props) {
           type="text"
           className="input search-input"
           onChange={handleChange}
-          placeholder="Search Restauant Name.."
+          placeholder="Search Restauant Name"
         />
         <select className="select" name="food-type" onChange={handleChangeCat}>
           <option value="">All</option>

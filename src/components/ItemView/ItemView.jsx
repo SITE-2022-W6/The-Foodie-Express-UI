@@ -14,6 +14,7 @@ export default function ItemView(props) {
   const [item, setItem] = useState({});
   const [ratingValue, setRatingValue] = useState(0)
   const [comment, setComment] = useState('')
+  const [reviews, setReviews] = useState([])
   const [error, setError] = useState('')
   const {restaurantId, itemName} = useParams()
 
@@ -24,7 +25,16 @@ export default function ItemView(props) {
       setItem(itemInfo.data.item);
       // console.log(item);
       setIsLoading(false);
-    }
+      getReviews(r, i)
+    };
+
+    async function getReviews(r, i) {
+      setIsLoading(true);
+      const listOfReviews = await apiClient.getReviewsForItem(r, i);
+      console.log(listOfReviews.data.reviews);
+      setReviews(listOfReviews.data.reviews);
+      setIsLoading(false);
+    };
     // console.log(restaurantId)
     // console.log(itemName)
     getItem(restaurantId, itemName)
@@ -59,16 +69,26 @@ export default function ItemView(props) {
     setIsOpen(false);
   }
 
+  const avgRatingValue = () => {
+    let sum = 0;
+    let len = 0
+    reviews.map(review => {
+      sum += review.rating;
+      ++len;
+    });
+    return (sum/len).toFixed(1);
+  }
+
   return (
-    <div className="center">
+    <div className="center navbar-margin-top">
       <div className="item-view">
         {/* The heading of item */}
         <h1>{item.name}</h1>
         <h3>{item.group_name}</h3>
         <p>{item.description}</p>
         <Rating
-          placeholderRating={3.5}
-          fractions={2}
+          initialRating={avgRatingValue()}
+          fractions={10}
           placeholderSymbol={<BsStarFill size={20}/>}
           emptySymbol={<BsStar size={20}/>}
           fullSymbol={<BsStarFill size={20}/>}
@@ -95,14 +115,9 @@ export default function ItemView(props) {
         <h2>Review</h2>
         <div className="review-session">
           {/* A list of reviews on the item */}
-          <Review/>
-          <Review/>
-          <Review/>
-          <Review/>
-          <Review/>
-          <Review/>
-          <Review/>
-          <Review/>
+          {reviews && reviews.map(review => {
+            return (<Review comment={review.content} date={review.created_at} rating={review.rating} user_id={review.user_id}/>)
+          })}
         </div>
       </div>
     </div>
@@ -113,20 +128,18 @@ export function Review(props) {
   return (
     <div className="review">
       <div className="header">
-        <h3>User Name</h3>
+        <h3>Username</h3>
         <Rating
-          placeholderRating={3.5}
+          initialRating={props.rating}
           fractions={2}
           placeholderSymbol={<BsStarFill size={20}/>}
           emptySymbol={<BsStar size={20}/>}
           fullSymbol={<BsStarFill size={20}/>}
           readonly
         />
-        <p>Date:</p>
+        <p>{props.date}</p>
       </div>
-      <div className="">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      </div>
+      <div className="review-content">{props.comment}</div>
       <hr/>
     </div>
   )

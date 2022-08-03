@@ -12,12 +12,14 @@
   background: #ffffff;
   border-radius: 1em;
   padding: 1em;
+  margin-top: 2em
 }
 
 .profile .view {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  margin-top: 2em;
   gap: 20px;
 }
 
@@ -27,4 +29,3 @@
   border-radius: 1em;
   border: 1px solid #00000080;
 }
-

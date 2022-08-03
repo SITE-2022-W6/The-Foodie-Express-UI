@@ -48,7 +48,7 @@ export default function RestaurantView() {
   }, [id]);
 
   return (
-    <div className="grid">
+    <div className="grid navbar-margin-top">
       {!isLoading ? (
         <div className="restaurant-view">
           {/* Restauant Header */}

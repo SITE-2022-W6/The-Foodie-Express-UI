@@ -6,7 +6,7 @@ import './Profile.css'
 
 export default function Profile(props) {
   return (
-    <div className="profile">
+    <div className="profile navbar-margin-top">
       {/* Checks if the user is logged in, if not it will redirect to the login page*/}
       {!props.isAuthenticated && <Navigate to="/login" replace={true} />}
       <div className="main">

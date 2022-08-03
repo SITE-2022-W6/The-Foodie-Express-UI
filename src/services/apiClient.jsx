@@ -99,6 +99,16 @@ class ApiClient {
     });
     return response;
   }
+
+  async getReviewsForItem(restaurantId, itemName) {
+    let response = await this.request({ endpoint: `review/all/review/item?restaurant_id=${restaurantId}&item_name=${itemName}` })
+    return response
+  }
+
+  async getUserByUserId(id) {
+    let response = await this.request({ endpoint: `auth/id?userId=${id}`})
+    return response
+  }
 }
 
 export default new ApiClient('http://localhost:3001');
