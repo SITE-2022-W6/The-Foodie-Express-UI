@@ -3,12 +3,14 @@
 }
 
 .dashboard .filter-session {
-  background: #ffffff;
+  background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
   padding: 1em 2em;
   display: flex;
   justify-content: flex-start;
   gap: 20px;
   border-radius: 1em;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .dashboard .search-input {
@@ -34,4 +36,22 @@
   justify-content: flex-start;
   margin: 2em auto;
   flex-wrap: wrap;
+}
+
+.dashboard .center-btn {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+}
+
+.dashboard .load-more-btn {
+  background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
+  color: #ffffff;
+}
+
+.dashboard .loading-more {
+  display: flex;
+  gap: 5px;
+  pointer-events: none;
+  flex-direction: row;
 }

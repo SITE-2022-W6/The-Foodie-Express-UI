@@ -87,7 +87,7 @@ export default function Login(props) {
               Log In
             </button>
           ) : (
-            <button className="btn login-btn loading" onClick={logUserIn}>
+            <button className="btn login-btn logging-in" onClick={logUserIn}>
               <div style={{ margin: '0' }}>Logging in</div>
               <Ripple color="#ffffff" size={21} />
             </button>

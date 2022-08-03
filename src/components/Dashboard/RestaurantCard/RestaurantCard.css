@@ -1,28 +1,46 @@
 .restaurant-card {
   display: inline-flex;
-  background: #ffffff;
+  background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
   border-radius: 1em;
 }
 
 .restaurant-card .banner {
   width: 350px;
-  height: 250px;
+  height: 175px;
   border-radius: 1em 1em 0 0;
   object-fit: cover;
 }
 
-.restaurant-card .title {
-  width: 300px;
+.restaurant-card .restaurnat-title {
+  max-width: 270px;
   font-size: 1.5em;
-  margin: 0.5em 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .restaurant-card .address {
-  width: 300px;
   font-size: 1em;
   margin: 0.25em 0;
+  max-width: 210px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .restaurant-card .info {
-  margin: 1em;
+  margin: 0;
+}
+
+.restaurant-card .distance {
+  font-size: 1em;
+  margin: 0;
+}
+
+.restaurant-card .head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 1em;
 }

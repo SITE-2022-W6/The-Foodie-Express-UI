@@ -65,6 +65,8 @@ export default function RestaurantView() {
               {restaurantInfo.state_province} </span>
               {restaurantInfo.phone && <span>{'•'}</span>}
               {restaurantInfo.phone && <span>{restaurantInfo.phone}</span>}
+              {cuisine && <span>{'•'}</span>}
+              {cuisine && <span>{cuisine}</span>}
               <span>{'•'}</span>
               <span>
                 <Rating

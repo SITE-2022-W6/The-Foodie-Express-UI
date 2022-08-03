@@ -12,6 +12,7 @@ export default function RestaurantCard(props) {
     if (banner.has(data)) {
       return banner.get(data)
     } else {
+      data = data.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"")
       let keyWord = data.split(" ");
       if (banner.has(keyWord[0])) {
         return banner.get(keyWord[0])
@@ -62,19 +63,21 @@ export default function RestaurantCard(props) {
         <Link to={`/restaurant/${props.restaurant.id}`} style={{textDecoration: 'none', color: '#000000'}}>
           <img src={getBanner(props.restaurant.cuisine_type_primary)} className="banner"/>
           <div className="info">
-            <h2 className="title">{props.restaurant.restaurant_name}</h2>
-            <p className="address">{props.restaurant.address_1}</p>
-
-            <Rating
-              placeholderRating={3.5}
-              fractions={2}
-              placeholderSymbol={<BsStarFill size={20}/>}
-              emptySymbol={<BsStar size={20}/>}
-              fullSymbol={<BsStarFill size={20}/>}
-              readonly
-            />
-
-            <p className="distance">{distance}</p>
+            <div className="head">
+              <h2 className="restaurnat-title">{props.restaurant.restaurant_name}</h2>
+              <p className="distance">{distance}</p>
+            </div>
+            <div className="head">
+              <p className="address">{props.restaurant.address_1}</p>
+              <Rating
+                placeholderRating={3.5}
+                fractions={2}
+                placeholderSymbol={<BsStarFill size={20}/>}
+                emptySymbol={<BsStar size={20}/>}
+                fullSymbol={<BsStarFill size={20}/>}
+                readonly
+              />
+            </div>
           </div>
         </Link>
       </div>} </>

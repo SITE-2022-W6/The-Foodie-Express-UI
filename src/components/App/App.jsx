@@ -9,11 +9,12 @@ import Dashboard from '../Dashboard/Dashboard';
 import RestaurantView from '../RestaurantView/RestaurantView';
 import ItemView from '../ItemView/ItemView';
 import Profile from '../Profile/Profile';
+import NotFound from '../NotFound/NotFound';
 import Footer from '../Footer/Footer';
 import './App.css';
 
 function App() {
-  {/* The useState for hiding the navbar and footer, and updating the delivery address, 
+  {/* The useState for hiding the navbar and footer, and updating the location, 
     user authentication, and user profile */}
   const [hideNavbar, setHideNavbar] = useState(false);
   const [address, setAddress] = useState('');
@@ -35,7 +36,7 @@ function App() {
   useEffect(() => {
     if (isAuthenticated) {
       window.localStorage.setItem('user_info', JSON.stringify(userInfo))
-      window.localStorage.setItem('is_authenticated', String(isAuthenticated))      
+      window.localStorage.setItem('is_authenticated', String(isAuthenticated))
     }
   })
 
@@ -113,7 +114,7 @@ function App() {
         {/* The Restauant page where the user can view the restaurant menu it has enter */}
         <Route path="/restaurant/:id" element={<RestaurantView />} />
         {/* The Item page where the user can view the food/drink that the restaurant has to offer */}
-        <Route path="/item/:restaurantId/:itemName" element={<ItemView/>}/>
+        <Route path="/item/:restaurantId/:itemName" element={<ItemView userInfo={userInfo} isAuthenticated={isAuthenticated} />}/>
         {/* The Profile page where the user can view its profile, recent review, and updates its review */}
         <Route
           path="/profile"
@@ -121,6 +122,7 @@ function App() {
             <Profile userInfo={userInfo} isAuthenticated={isAuthenticated} />
           }
         />
+        <Route path="/*" element={<NotFound/>}/>
       </Routes>
       {/* To hide the footer on specific pages/routes */}
       {footer ? <Footer /> : null}
