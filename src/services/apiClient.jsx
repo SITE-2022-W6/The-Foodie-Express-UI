@@ -25,7 +25,7 @@ class ApiClient {
 
     try {
       const res = await axios({ url, method, data, headers });
-      return { data: res.data, status:res.status, error: null };
+      return { data: res.data, status: res.status, error: null };
     } catch (error) {
       console.error({ errorResponse: error.response });
       const message = error?.response?.data?.error?.message;
@@ -67,23 +67,37 @@ class ApiClient {
 
   //Gets retaurant list by city and state
   //Offset controls which page of results to get
-  async getRestaurantsByLocation(cityState, offset)
-  {
+  async getRestaurantsByLocation(cityState, offset) {
     // console.log(cityState)
-    let response = await this.request({endpoint: `restaurant/location?state=${cityState.state}&city=${cityState.city}&offset=${offset}`})
-    return response
+    let response = await this.request({
+      endpoint: `restaurant/location?state=${cityState.state}&city=${cityState.city}&offset=${offset}`,
+    });
+    return response;
   }
 
   //Gets menu of a restuarant from its OpenMenuId
   async getMenuByOpenMenuId(id) {
-    let response = await this.request({endpoint: `restaurant/search?OMId=${id}`})
-    return response
+    let response = await this.request({
+      endpoint: `restaurant/search?OMId=${id}`,
+    });
+    return response;
   }
 
   //Gets details about a specific menu item
   async getMenuItem(restaurantId, itemName) {
-    let response = await this.request({endpoint: `menu/item?restaurantId=${restaurantId}&itemName=${itemName}`})
-    return response
+    let response = await this.request({
+      endpoint: `menu/item?restaurantId=${restaurantId}&itemName=${itemName}`,
+    });
+    return response;
+  }
+
+  async createReview(review) {
+    let response = await this.request({
+      endpoint: 'review/create-review',
+      method: 'POST',
+      data: review,
+    });
+    return response;
   }
 }
 

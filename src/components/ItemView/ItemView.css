@@ -6,7 +6,8 @@
 .item-view {
   background: #fff;
   padding: 1em;
-  margin: 2em;
+  margin: 1em 0;
+  width: 50%;
   display: inline-flex;
   justify-content: center;
   flex-direction: column;

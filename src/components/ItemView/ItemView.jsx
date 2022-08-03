@@ -39,7 +39,7 @@ export default function ItemView(props) {
   }
 
   const handleSubmit = async () => {
-    isLoading(true)
+    setIsLoading(true)
     const { data, error } = await apiClient.createReview({
       user_id: props.userInfo.id,
       restaurant_id: restaurantId,
@@ -51,7 +51,7 @@ export default function ItemView(props) {
       return
     } 
     if (data?.review) {
-      //console.log(data.review)
+      console.log(data.review)
     }
     setRatingValue(0);
     setComment('');
