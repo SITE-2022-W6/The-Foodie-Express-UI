@@ -15,6 +15,7 @@ export default function Dashboard(props) {
   const [restaurants, setRestaurants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingBtn, setIsLoadingBtn] = useState(false);
+  const [statusCode, setStatusCode] = useState()
   const restaurantType = new Set();
   const [offset, setOffset] = useState(0);
 
@@ -50,25 +51,28 @@ export default function Dashboard(props) {
       // console.log(cs)
       const restaurantlist = await apiClient.getRestaurantsByLocation(cs, 0);
       // console.log(restaurantlist)
-      setRestaurants(restaurantlist.data.restaurants);
-      setIsLoading(false);
+      setRestaurants(restaurantlist.data.restaurants)
+      setStatusCode(restaurantlist.status)
+      setIsLoading(false)
     }
     getRestaurants(props.cityState);
   }, [props.cityState]);
 
   const banner = new Map(Object.entries(data));
-  restaurants.map((restaurant) => {
-    if (banner.has(restaurant.cuisine_type_primary)) {
-      restaurantType.add(restaurant.cuisine_type_primary);
-    } else {
-      let cuisine = restaurant.cuisine_type_primary.replace(
-        /[.,\/#!$%\^&\*;:{}=\-_`~()]/g,
-        ''
-      );
-      cuisine = cuisine.split(' ');
-      restaurantType.add(cuisine[0]);
-    }
-  });
+  if (statusCode == 200) {
+    restaurants.map((restaurant) => {
+      if (banner.has(restaurant.cuisine_type_primary)) {
+        restaurantType.add(restaurant.cuisine_type_primary);
+      } else {
+        let cuisine = restaurant.cuisine_type_primary.replace(
+          /[.,\/#!$%\^&\*;:{}=\-_`~()]/g,
+          ''
+        );
+        cuisine = cuisine.split(' ');
+        restaurantType.add(cuisine[0]);
+      }
+    });
+  }
 
   // console.log(restaurants)
 
@@ -99,7 +103,7 @@ export default function Dashboard(props) {
           <option value="recommended">Recommended</option>
         </select>
       </div>
-      {!isLoading ? (
+      {(!isLoading && statusCode == 200) ? (
         <div className="grid">
           {restaurants
             .filter((cat) => {
@@ -129,7 +133,7 @@ export default function Dashboard(props) {
             })}
         </div>
       ) : (
-        <Loading />
+        (!isLoading && statusCode == 204) ? <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1> : <Loading />
       )}
       <div className="center-btn">
         {!isLoadingBtn ? (
