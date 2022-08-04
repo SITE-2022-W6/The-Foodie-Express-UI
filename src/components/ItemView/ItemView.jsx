@@ -125,10 +125,15 @@ export default function ItemView(props) {
 }
 
 export function Review(props) {
+  const [userName, setUserName] = React.useState()
+  apiClient.getUserByUserId(props.user_id)
+  .then(result => {
+    setUserName(`${result.first_name} ${result.last_name}`)
+  })
   return (
     <div className="review">
       <div className="header">
-        <h3>Username</h3>
+        <h3>{userName}</h3>
         <Rating
           initialRating={props.rating}
           fractions={2}

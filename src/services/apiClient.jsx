@@ -107,7 +107,7 @@ class ApiClient {
 
   async getUserByUserId(id) {
     let response = await this.request({ endpoint: `auth/id?userId=${id}`})
-    return response
+    return response.data.user
   }
 }
 
