@@ -101,7 +101,7 @@ class ApiClient {
   }
 
   async getReviewsForItem(restaurantId, itemName) {
-    let response = await this.request({ endpoint: `review/all/review/item?restaurant_id=${restaurantId}&item_name=${itemName}` })
+    let response = await this.request({ endpoint: `review/item?restaurant_id=${restaurantId}&item_name=${itemName}` })
     return response
   }
 
