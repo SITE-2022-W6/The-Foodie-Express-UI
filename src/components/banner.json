@@ -20,6 +20,7 @@
   "Coffee House": "https://images.unsplash.com/photo-1642026465180-5e25255838e9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8JTIzY29mZmVlc2hvcHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=800&q=60",
   "Continental": "https://static.toiimg.com/photo/64029527.cms",
   "Cuban": "https://www.elmesondepepe.com/wp-content/uploads/2015/10/el-meson-cuban-cuisine.jpg",
+  "Deli": "https://mypbelleville.com/images/banners12.jpg",
   "Desserts": "https://cdn.hswstatic.com/gif/desserts-update.jpg",
   "Diner": "https://static.wixstatic.com/media/b53659_ed3d1835358a47eabcc4e1e51e10d526~mv2.jpg/v1/fill/w_1024,h_1024,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/b53659_ed3d1835358a47eabcc4e1e51e10d526~mv2.jpg",
   "Ethiopian": "https://cdn.vox-cdn.com/thumbor/Bzp7oNlVoq7y03RKdJEQ-Otqus8=/0x0:2000x1335/1200x0/filters:focal(0x0:2000x1335):no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/22231434/20201_01_11_EthiopianFood_Eater_HeatWeek_001.jpg",
@@ -94,7 +95,7 @@
   "Buffalo Wild Wings": "https://stories.inspirebrands.com/wp-content/uploads/2020/09/New-BWW-Sauces-1.jpg",
   "Arby's": "https://www.mashed.com/img/gallery/arbys-just-brought-back-a-fan-favorite-sandwich/l-intro-1651528355.jpg",
   "Little Caesars": "https://duyt4h9nfnj50.cloudfront.net/resized/bulk_actions_image_3779203d-78e4-4863-a286-0a59ac1cac8d-w2880-b5.jpg",
-  "Dairy Queen": "https://www.restaurantnetwork.com/wp-content/uploads/2022/04/dairy-queen.pngck",
+  "Dairy Queen": "https://www.restaurantnetwork.com/wp-content/uploads/2022/04/dairy-queen.png",
   "Jack in the Box ": "https://www.mashed.com/img/gallery/this-might-be-why-new-york-doesnt-have-any-jack-in-the-box-locations/l-intro-1648653185.jpg",
   "Chili's": "https://images.prismic.io/brinker/cf52b96a-e2e4-4dfd-849c-f53a5987817a_Q3OLO-400x600_146.jpg?auto=compress,format&rect=33,0,533,400&w=800&h=600",
   "IHOP": "https://mms.businesswire.com/media/20210413005282/en/870900/4/Group_Menu_Shot_%231_edit.jpg",
@@ -111,5 +112,10 @@
   "Whataburger": "https://375041.smushcdn.com/2479369/wp-content/uploads/Hamburger-meal.png?lossy=1&strip=1&webp=1",
   "Jersey Mike's Subs": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiALpaBkx_LYM_-B0ZmYZIP5VKdHuCYQPT0adjIwIA3igwkzIWXZ7EJriL81cJ1LmtG-U&usqp=CAU",
   "Boston Market": "https://www.chewboom.com/wp-content/uploads/2020/05/Boston-Market-Offers-New-Two-Meat-Family-Meal-Combo.jpg",
-  "Nathan's Famous": "https://mms.businesswire.com/media/20210922005823/en/908952/5/Nathan%27s_Famil_4-3_ratio_030920_r1-02.jpg"
+  "Nathan's Famous": "https://mms.businesswire.com/media/20210922005823/en/908952/5/Nathan%27s_Famil_4-3_ratio_030920_r1-02.jpg",
+  "Denny's": "https://www.visitlakecounty.org/images/member_photos/dennys.jpg",
+  "Friendly's": "https://ddl1ff62eln9g.cloudfront.net/ez-image/138380/Friendlys_EZ_Catering_header_1200x800px.jpg?fh=1200&fw=600&h=599&l=0&oh=800&ow=1200&q=60&t=0&w=1199",
+  "Tim Hortons [US]": "https://www.mashed.com/img/gallery/tim-hortons-secret-menu-options-you-didnt-know-about/try-these-food-options-too-1614456760.jpg",
+  "T.G.I. Friday's": "https://cdn.vox-cdn.com/thumbor/t3w_FAjLar3nTMuIoIQVUP2RzLE=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/9372331/tgifriday_8602.jpg",
+  "Qdoba": "https://cdn.winsightmedia.com/platform/files/public/2020-08/background/1100_1597245852.jpg?VersionId=QSeN3ivopgt0TmbYQHpWkK5EIWZepkgA"
 }

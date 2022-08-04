@@ -21,3 +21,10 @@
   top: 0;
   bottom: 0;
 }
+
+.item-view .item-review {
+  background: #f1f1f1;
+  padding: 1em;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}

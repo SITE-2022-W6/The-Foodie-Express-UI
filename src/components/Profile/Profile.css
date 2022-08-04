@@ -15,12 +15,17 @@
   margin-top: 2em
 }
 
-.profile .view {
+.profile .recent-review {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   margin-top: 2em;
   gap: 20px;
+  background: #ffffff;
+  padding: 1em;
+  width: 60%;
+  height: 750px;
+  border-radius: 1em;
 }
 
 .profile .pfp {

@@ -11,6 +11,7 @@ export default function ItemView(props) {
   {/* The useState for toggling modal popup */}
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [restaurantInfo, setRestaurntInfo] = useState({});
   const [item, setItem] = useState({});
   const [ratingValue, setRatingValue] = useState(0)
   const [comment, setComment] = useState('')
@@ -23,20 +24,17 @@ export default function ItemView(props) {
       setIsLoading(true);
       const itemInfo = await apiClient.getMenuItem(r, i);
       setItem(itemInfo.data.item);
-      // console.log(item);
       setIsLoading(false);
       getReviews(r, i)
     };
 
     async function getReviews(r, i) {
+      window.scrollTo(0, 0)
       setIsLoading(true);
       const listOfReviews = await apiClient.getReviewsForItem(r, i);
-      console.log(listOfReviews.data.reviews);
       setReviews(listOfReviews.data.reviews);
       setIsLoading(false);
     };
-    // console.log(restaurantId)
-    // console.log(itemName)
     getItem(restaurantId, itemName)
   }, [restaurantId, itemName]);
 
@@ -47,6 +45,10 @@ export default function ItemView(props) {
   const handleRatingChange = (value) => {
     setRatingValue(value)
   }
+  //apiClient.getMenuByOpenMenuId(restaurantId)
+  //.then(restaurant => {
+  //  setRestaurntInfo(restaurant.data.menu.restaurant_info)
+  //})
 
   const handleSubmit = async () => {
     setIsLoading(true)
@@ -61,12 +63,13 @@ export default function ItemView(props) {
       return
     } 
     if (data?.review) {
-      console.log(data.review)
+      
     }
     setRatingValue(0);
     setComment('');
     setIsLoading(false);
     setIsOpen(false);
+    window.location.reload()
   }
 
   const avgRatingValue = () => {
@@ -82,18 +85,20 @@ export default function ItemView(props) {
   return (
     <div className="center navbar-margin-top">
       <div className="item-view">
+        <div className="item-heading">
         {/* The heading of item */}
-        <h1>{item.name}</h1>
-        <h3>{item.group_name}</h3>
+          <h1 style={{}}>{item.name}</h1>
+          <h3>{restaurantInfo.restaurant_name} at {restaurantInfo.address_1}, {restaurantInfo.city_town}, {restaurantInfo.state_province}</h3>
+          <Rating
+            initialRating={avgRatingValue()}
+            fractions={10}
+            placeholderSymbol={<BsStarFill size={20}/>}
+            emptySymbol={<BsStar size={20}/>}
+            fullSymbol={<BsStarFill size={20}/>}
+            readonly
+          />
+        </div>
         <p>{item.description}</p>
-        <Rating
-          initialRating={avgRatingValue()}
-          fractions={10}
-          placeholderSymbol={<BsStarFill size={20}/>}
-          emptySymbol={<BsStar size={20}/>}
-          fullSymbol={<BsStarFill size={20}/>}
-          readonly
-        />
         <div className="address-modal">
           {/* A button to add a review via modal popup */}
           <button className="btn" onClick={() => setIsOpen(true)}>Add Review</button>
@@ -126,14 +131,19 @@ export default function ItemView(props) {
 
 export function Review(props) {
   const [userName, setUserName] = React.useState()
-  apiClient.getUserByUserId(props.user_id)
-  .then(result => {
-    setUserName(`${result.first_name} ${result.last_name}`)
-  })
+  //apiClient.getUserByUserId(props.user_id)
+  //.then(result => {
+  //  setUserName(`${result.first_name} ${result.last_name}`)
+  //})
+  let date = props.date.split("-")
+  date[2] = date[2].substring(0,2)
   return (
-    <div className="review">
+    <div className="item-review">
       <div className="header">
-        <h3>{userName}</h3>
+        <div className="name-date">
+          <h3>{userName}</h3>
+          <p>{`${Number(date[1])} / ${Number(date[2])} / ${Number(date[0])}`}</p>
+        </div>
         <Rating
           initialRating={props.rating}
           fractions={2}
@@ -142,10 +152,8 @@ export function Review(props) {
           fullSymbol={<BsStarFill size={20}/>}
           readonly
         />
-        <p>{props.date}</p>
       </div>
       <div className="review-content">{props.comment}</div>
-      <hr/>
     </div>
   )
 }

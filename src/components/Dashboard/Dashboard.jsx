@@ -45,12 +45,11 @@ export default function Dashboard(props) {
   props.setFooter(true);
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     async function getRestaurants(cs) {
       setOffset(0);
       setIsLoading(true);
-      // console.log(cs)
       const restaurantlist = await apiClient.getRestaurantsByLocation(cs, 0);
-      // console.log(restaurantlist)
       setRestaurants(restaurantlist.data.restaurants)
       setStatusCode(restaurantlist.status)
       setIsLoading(false)
@@ -73,8 +72,6 @@ export default function Dashboard(props) {
       }
     });
   }
-
-  // console.log(restaurants)
 
   return (
     <div className="dashboard navbar-margin-top">
@@ -99,6 +96,7 @@ export default function Dashboard(props) {
           })}
         </select>
         <select className="select" name="category">
+          <option value="for-you">For You</option>
           <option value="nearby">Nearby</option>
           <option value="recommended">Recommended</option>
         </select>
@@ -147,7 +145,7 @@ export default function Dashboard(props) {
           </button>
         ) : (
           <button className="btn load-more-btn loading-more">
-            <div style={{ margin: '0' }}>Logging in</div>
+            <div style={{ margin: '0' }}>Loading More</div>
             <Ripple color="#ffffff" size={21} />
           </button>
         )}
