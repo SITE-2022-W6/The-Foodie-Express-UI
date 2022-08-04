@@ -8,7 +8,10 @@ import './RestaurantCard.css';
 export default function RestaurantCard(props) {
   const banner = new Map(Object.entries(data));
 
-  const getBanner = (data) => {
+  const getBanner = (name, data) => {
+    if (banner.has(name)) {
+      return banner.get(name)
+    }
     if (banner.has(data)) {
       return banner.get(data)
     } else {
@@ -40,13 +43,8 @@ export default function RestaurantCard(props) {
         {
           setDistance(response.rows[0].elements[0].distance.text)
         }
-        else if(status === "ZERO_RESULTS")
-        {
-          setDistance("No route could be found between the origin and destination")
-        }
-        //else if status === "NOT_FOUND"
         else {
-          setDistance("The origin and/or destination of this pairing could not be geocoded")
+          setDistance("N/A")
         }
         setGotDistance(true)
       }
@@ -61,7 +59,7 @@ export default function RestaurantCard(props) {
   return (
       <> {gotDistance && <div className="restaurant-card" key={props.restaurant.id}>
         <Link to={`/restaurant/${props.restaurant.id}`} style={{textDecoration: 'none', color: '#000000'}}>
-          <img src={getBanner(props.restaurant.cuisine_type_primary)} className="banner"/>
+          <img src={getBanner(props.restaurant.restaurant_name, props.restaurant.cuisine_type_primary)} className="banner"/>
           <div className="info">
             <div className="head">
               <h2 className="restaurnat-title">{props.restaurant.restaurant_name}</h2>

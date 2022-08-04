@@ -22,7 +22,10 @@ export default function RestaurantView() {
 
   const banner = new Map(Object.entries(data));
 
-  const getBanner = (data) => {
+  const getBanner = (name, data) => {
+    if (banner.has(name)) {
+      return banner.get(name)
+    }
     if (banner.has(data)) {
       return banner.get(data);
     } else {
@@ -53,7 +56,7 @@ export default function RestaurantView() {
         <div className="restaurant-view">
           {/* Restauant Header */}
           <div className="banner">
-            <img src={getBanner(cuisine)} className="banner" />
+            <img src={getBanner(restaurantInfo.restaurant_name, cuisine)} className="banner" />
           </div>
           <div className="heading" style={{marginBottom: '2em'}}>
             <h1 style={{marginBottom: "0"}}>{restaurantInfo.restaurant_name}</h1>
