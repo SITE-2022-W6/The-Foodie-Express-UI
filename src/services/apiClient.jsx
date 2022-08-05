@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_BASE_URL } from "../../constants"
 
 class ApiClient {
   constructor(remoteHostUrl) {
@@ -121,9 +122,9 @@ class ApiClient {
   }
 
   async deleteReview(id) {
-    let response = await this.request({ endpoint: `review/delete?id=${id}`})
+    let response = await this.request({ endpoint: `review/delete?id=${id}`, method: 'DELETE'})
     return response
   }
 }
 
-export default new ApiClient('http://localhost:3001');
+export default new ApiClient(API_BASE_URL || "http://localhost:3001");

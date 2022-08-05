@@ -13,6 +13,8 @@ export default function Profile(props) {
   const [restaurantInfo, setRestaurntInfo] = useState({});
   const [isOpen, setIsOpen] = useState(false);
 
+  const auth = window.localStorage.getItem("is_authenticated")
+
   async function deleteSelectedReview(id) {
     setIsLoading(true);
     await apiClient.deleteReview(id);
@@ -34,7 +36,7 @@ export default function Profile(props) {
   return (
     <div className="profile navbar-margin-top">
       {/* Checks if the user is logged in, if not it will redirect to the login page*/}
-      {!props.isAuthenticated && <Navigate to="/login" replace={true} />}
+      {!auth && <Navigate to="/login" replace={true} />}
       <div className="main">
         {/* The profile of the user */}
         <img
@@ -82,7 +84,7 @@ export default function Profile(props) {
                   <button className="btn delete-btn" onClick={() => setIsOpen(true)}>Delete</button>
                   <Modal open={isOpen} onClose={() => setIsOpen(false)}>
                     <h1>Are you sure you want to delete this review?</h1>
-                    <button className="btn yes-btn">Yes</button>
+                    <button className="btn yes-btn" onClick={() => deleteSelectedReview(review.id)}>Yes</button>
                     <button className="btn no-btn" onClick={() => setIsOpen(false)}>No</button>
                   </Modal>
                 </div>
