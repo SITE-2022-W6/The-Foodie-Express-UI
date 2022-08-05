@@ -109,6 +109,21 @@ class ApiClient {
     let response = await this.request({ endpoint: `auth/id?userId=${id}`})
     return response.data.user
   }
+
+  async getReviews(id) {
+    let response = await this.request({ endpoint: `review/user?id=${id}`})
+    return response
+  }
+
+  async favoriteCuisine(userId) {
+    let response = await this.request({ endpoint: `preference/favorite-cuisine/${userId}` })
+    return response
+  }
+
+  async deleteReview(id) {
+    let response = await this.request({ endpoint: `review/delete?id=${id}`})
+    return response
+  }
 }
 
 export default new ApiClient('http://localhost:3001');

@@ -6,6 +6,7 @@
   "Asian/Oriental": "https://static.toiimg.com/photo/64029527.cms",
   "Bakery": "https://www.snackandbakery.com/ext/resources/images/bakeryproducts.jpg?1432238179",
   "Barbeque": "https://www.thespruceeats.com/thmb/CvC-d53GOPON2Mdgkm7FkAxZ9_s=/1892x1419/smart/filters:no_upscale()/GettyImages-691572647-5b215adfff1b7800370c2038.jpg",
+  "Barbecue": "https://www.thespruceeats.com/thmb/CvC-d53GOPON2Mdgkm7FkAxZ9_s=/1892x1419/smart/filters:no_upscale()/GettyImages-691572647-5b215adfff1b7800370c2038.jpg",
   "Belgian": "https://www.brussels.com/media/uploads/brussels.com/2017/08/Belgian%20Cuisine%20in%20Brussels.jpg",
   "Brazilian": "https://blog.amigofoods.com/wp-content/uploads/2019/04/brazilian-foods.jpg",
   "Breakfast": "https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_30/1463322/america-s-favorite-breakfast-today-main-190722.jpg",
@@ -65,7 +66,7 @@
   "Southwest": "https://bloximages.chicago2.vip.townnews.com/thesouthern.com/content/tncms/assets/v3/editorial/9/b7/9b7a9629-d791-5384-83c6-6c5d5b63a5eb/612cfe3cc172c.image.jpg?resize=750%2C500",
   "Southern": "https://www.romanticasheville.com/sites/default/files/images/basic_page/Rockys-2.jpg",
   "Spanish": "https://www.savoredjourneys.com/wp-content/uploads/2015/03/spanish-foods.jpg",
-  "Steakhouse": "https://olo-images-live.imgix.net/14/148a54de922e4aecb705b905f405cd29.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=1500&h=1200&fit=crop&s=cba7c8944afbf3d7157d0be622a741c7",
+  "Steakhouse": "https://www.michaeljordansteakhouse.com/perch/resources/steaksmanship-inset-1.jpg",
   "Sunday Brunch": "https://njmonthly.com/wp-content/uploads/2022/04/easter-scaled.jpg",
   "Sushi": "https://www.eatthis.com/wp-content/uploads/sites/4/2020/07/assorted-sushi.jpg?quality=82&strip=1",
   "Tapas": "https://www.cook2eatwell.com/wp-content/uploads/2018/05/RC-Tapas-Platter-Image.jpg",
@@ -96,7 +97,7 @@
   "Arby's": "https://www.mashed.com/img/gallery/arbys-just-brought-back-a-fan-favorite-sandwich/l-intro-1651528355.jpg",
   "Little Caesars": "https://duyt4h9nfnj50.cloudfront.net/resized/bulk_actions_image_3779203d-78e4-4863-a286-0a59ac1cac8d-w2880-b5.jpg",
   "Dairy Queen": "https://www.restaurantnetwork.com/wp-content/uploads/2022/04/dairy-queen.png",
-  "Jack in the Box ": "https://www.mashed.com/img/gallery/this-might-be-why-new-york-doesnt-have-any-jack-in-the-box-locations/l-intro-1648653185.jpg",
+  "Jack In The Box": "https://www.mashed.com/img/gallery/this-might-be-why-new-york-doesnt-have-any-jack-in-the-box-locations/l-intro-1648653185.jpg",
   "Chili's": "https://images.prismic.io/brinker/cf52b96a-e2e4-4dfd-849c-f53a5987817a_Q3OLO-400x600_146.jpg?auto=compress,format&rect=33,0,533,400&w=800&h=600",
   "IHOP": "https://mms.businesswire.com/media/20210413005282/en/870900/4/Group_Menu_Shot_%231_edit.jpg",
   "Papa John's": "https://www.papajohns.com/promotional-offers/img/po-hero.jpg",
@@ -117,5 +118,6 @@
   "Friendly's": "https://ddl1ff62eln9g.cloudfront.net/ez-image/138380/Friendlys_EZ_Catering_header_1200x800px.jpg?fh=1200&fw=600&h=599&l=0&oh=800&ow=1200&q=60&t=0&w=1199",
   "Tim Hortons [US]": "https://www.mashed.com/img/gallery/tim-hortons-secret-menu-options-you-didnt-know-about/try-these-food-options-too-1614456760.jpg",
   "T.G.I. Friday's": "https://cdn.vox-cdn.com/thumbor/t3w_FAjLar3nTMuIoIQVUP2RzLE=/1400x1050/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/9372331/tgifriday_8602.jpg",
-  "Qdoba": "https://cdn.winsightmedia.com/platform/files/public/2020-08/background/1100_1597245852.jpg?VersionId=QSeN3ivopgt0TmbYQHpWkK5EIWZepkgA"
+  "Qdoba": "https://cdn.winsightmedia.com/platform/files/public/2020-08/background/1100_1597245852.jpg?VersionId=QSeN3ivopgt0TmbYQHpWkK5EIWZepkgA",
+  "Outback Steakhouse": "https://olo-images-live.imgix.net/14/148a54de922e4aecb705b905f405cd29.jpg?auto=format%2Ccompress&q=60&cs=tinysrgb&w=1500&h=1200&fit=crop&s=cba7c8944afbf3d7157d0be622a741c7"
 }

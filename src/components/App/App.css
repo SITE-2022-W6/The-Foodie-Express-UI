@@ -12,7 +12,8 @@
 
 .btn,
 .input,
-.select {
+.select,
+.textarea {
   border-radius: 5px;
   font-family: 'DM Sans', sans-serif;
   font-weight: bold;

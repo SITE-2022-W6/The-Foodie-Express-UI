@@ -14,6 +14,11 @@
   border-radius: 1em;
 }
 
+.item-view .add-review-btn, .item-view .submit-review-btn {
+  background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
+  color: #ffffff;
+}
+
 .item-view .review-session {
   height: 400px;
   overflow: hidden;
@@ -27,4 +32,16 @@
   padding: 1em;
   border-radius: 1em;
   margin-bottom: 1em;
+}
+
+.item-review .name-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 0;
+}
+
+.item-review .review-content {
+  margin-top: 1em;
+  font-weight: bold;
 }
