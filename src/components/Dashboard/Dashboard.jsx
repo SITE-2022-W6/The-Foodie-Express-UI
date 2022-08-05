@@ -44,8 +44,34 @@ export default function Dashboard(props) {
   props.setHideNavbar(false);
   props.setFooter(true);
 
+  //Saves the address on refresh
   useEffect(() => {
-    window.scrollTo(0, 0)
+    //Get from local Storage
+    const cs = window.localStorage.getItem("cityState")
+    const add = window.localStorage.getItem("address")
+    // console.log({cs})
+    // console.log({add})
+    // console.log(cs && cs != "null" )
+    //If there was something in local storage, and nothing for the props
+    //Set the props
+    if(cs && cs != "null" && props.cityState == null)
+    {
+      // console.log("setting???")
+      props.setCityState(JSON.parse(cs))
+      props.setAddress(add)
+    }
+    //Else save the new address to local storage
+    else{
+      // console.log("LOCAL STORAGE")
+      // console.log(props.cityState)
+      // console.log(props.address)
+      window.localStorage.setItem("address", props.address)
+      window.localStorage.setItem("cityState", JSON.stringify(props.cityState))
+    }
+  }, [props.cityState])
+
+  useEffect(() => {
+     window.scrollTo(0, 0)
     async function getRestaurants(cs) {
       setOffset(0);
       setIsLoading(true);
@@ -53,6 +79,7 @@ export default function Dashboard(props) {
       setRestaurants(restaurantlist.data.restaurants)
       setStatusCode(restaurantlist.status)
       setIsLoading(false)
+      // console.log("ran")
     }
     getRestaurants(props.cityState);
   }, [props.cityState]);
@@ -75,7 +102,7 @@ export default function Dashboard(props) {
 
   return (
     <div className="dashboard navbar-margin-top">
-      {!props.address && <Navigate to="/" />}
+      {/* {!props.address && <Navigate to="/" />} */}
       <h1 style={{ fontSize: '3em' }}>
         {/* Welcoming user who log on or not logged in */}
         Hi {props.userInfo?.firstName ? props.userInfo.firstName : 'Stranger'},
