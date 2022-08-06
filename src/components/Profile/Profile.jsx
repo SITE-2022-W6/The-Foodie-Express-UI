@@ -20,6 +20,7 @@ export default function Profile(props) {
     await apiClient.deleteReview(id);
     setIsOpen(false);
     setIsLoading(false);
+    window.location.reload();
   }
 
   useEffect(() => {
@@ -66,7 +67,7 @@ export default function Profile(props) {
                       margin: '0.5em 0',
                     }}
                   >
-                    <h2 style={{ margin: '0' }}>{review.menu_item_name} ()</h2>
+                    <h2 style={{ margin: '0' }}>{review.menu_item_name}</h2>
                     <p style={{ margin: '0' }}>{`${Number(date[1])} / ${Number(
                       date[2]
                     )} / ${Number(date[0])}`}</p>
