@@ -19,6 +19,7 @@ export default function Dashboard(props) {
   const restaurantType = new Set();
   const [offset, setOffset] = useState(0);
   const [filter, setFilter] = useState("Nearby")
+  const [recCuisine, setRecCuisine] = useState("")
 
   //To update the search term useState
   const handleChange = (e) => {
@@ -30,8 +31,17 @@ export default function Dashboard(props) {
   };
 
   //Handles changes to type of results being shown (Nearby or Recommended)
-  const handleChangeFilter = (e) => {
+  const handleChangeFilter = async (e) => {
+    console.log("changed")
+    console.log(statusCode)
+    setIsLoading(true)
     setFilter(e.target.value)
+    if(e.target.value === "Recommended")
+    {
+      const recommend = await apiClient.favoriteCuisine(props.userInfo.id)
+      setRecCuisine(recommend.cuisine)
+    }
+    setIsLoading(false)
   }
 
   //Loads more restaurants
@@ -133,13 +143,21 @@ export default function Dashboard(props) {
           <option value="recommended">Recommended</option>
         </select>
       </div>
-      {/* Not loading, and there are restaruants to display */}
+      {/* Not loading, and there are restaruants to display*/}
       {!isLoading && statusCode == 200 &&
         <div className="grid">
           {restaurants
             .filter((cat) => {
-              if (restType) {
-                return cat.cuisine_type_primary === restType;
+              //If filter is nearby
+              if(filter === "Nearby")
+              {
+                if (restType) {
+                  return cat.cuisine_type_primary === restType;
+                }
+              }
+              //If filter is recommended
+              else{
+                return cat.cuisine_type_primary === recCuisine
               }
               return cat;
             })
@@ -163,8 +181,11 @@ export default function Dashboard(props) {
               );
             })}
         </div>}
-        {/* Not loading, but there are no more restaurants to display*/}
+        {/* Recommended Restaurants */}
+
+        {/* Not loading, but there are no more restaurants to display */}
         {!isLoading && statusCode == 204 && <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1>}
+        {/* Loading Results, display loading */}
         {isLoading && <Loading />}
       <div className="center-btn">
         {!isLoadingBtn ? (

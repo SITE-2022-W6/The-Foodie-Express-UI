@@ -22,6 +22,8 @@ export default function ItemView(props) {
   const [error, setError] = useState('');
   const { restaurantId, itemName } = useParams();
   const [userName, setUserName] = React.useState();
+  const [restId, setRestId] = React.useState();
+
 
   useEffect(() => {
     async function getItem(r, i) {
@@ -41,6 +43,11 @@ export default function ItemView(props) {
     apiClient.getMenuByOpenMenuId(restaurantId).then((restaurant) => {
       setRestaurntInfo(restaurant.data.menu.restaurant_info);
     });
+    async function setId() {
+      const id = await apiClient.getIdFromOpenMenuId(restaurantId)
+      setRestId(id.id)
+    }
+    setId()
   }, []);
 
   const handleChange = (e) => {
@@ -55,7 +62,7 @@ export default function ItemView(props) {
     setIsLoading(true);
     const { data, error } = await apiClient.createReview({
       user_id: props.userInfo.id,
-      restaurant_id: restaurantId,
+      restaurant_id: restId,
       menu_item_name: itemName,
       rating: ratingValue,
       content: comment,
