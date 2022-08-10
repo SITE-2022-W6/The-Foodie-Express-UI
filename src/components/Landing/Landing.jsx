@@ -25,6 +25,7 @@ export default function Landing(props) {
       const city = short_address.substring(short_address.lastIndexOf(', ') + 2);
       props.setCityState({ city, state });
     }
+    window.localStorage.setItem('location', JSON.stringify(props.cityState))
     navigate('/dashboard');
   };
 

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { API_BASE_URL } from "../../constants"
 
 class ApiClient {
   constructor(remoteHostUrl) {
@@ -25,7 +26,7 @@ class ApiClient {
 
     try {
       const res = await axios({ url, method, data, headers });
-      return { data: res.data, status:res.status, error: null };
+      return { data: res.data, status: res.status, error: null };
     } catch (error) {
       console.error({ errorResponse: error.response });
       const message = error?.response?.data?.error?.message;
@@ -67,24 +68,63 @@ class ApiClient {
 
   //Gets retaurant list by city and state
   //Offset controls which page of results to get
-  async getRestaurantsByLocation(cityState, offset)
-  {
+  async getRestaurantsByLocation(cityState, offset) {
     // console.log(cityState)
-    let response = await this.request({endpoint: `restaurant/location?state=${cityState.state}&city=${cityState.city}&offset=${offset}`})
-    return response
+    let response = await this.request({
+      endpoint: `restaurant/location?state=${cityState.state}&city=${cityState.city}&offset=${offset}`,
+    });
+    return response;
   }
 
   //Gets menu of a restuarant from its OpenMenuId
   async getMenuByOpenMenuId(id) {
-    let response = await this.request({endpoint: `restaurant/search?OMId=${id}`})
-    return response
+    let response = await this.request({
+      endpoint: `restaurant/search?OMId=${id}`,
+    });
+    return response;
   }
 
   //Gets details about a specific menu item
   async getMenuItem(restaurantId, itemName) {
-    let response = await this.request({endpoint: `menu/item?restaurantId=${restaurantId}&itemName=${itemName}`})
+    let response = await this.request({
+      endpoint: `menu/item?restaurantId=${restaurantId}&itemName=${itemName}`,
+    });
+    return response;
+  }
+
+  async createReview(review) {
+    let response = await this.request({
+      endpoint: 'review/create-review',
+      method: 'POST',
+      data: review,
+    });
+    return response;
+  }
+
+  async getReviewsForItem(restaurantId, itemName) {
+    let response = await this.request({ endpoint: `review/item?restaurant_id=${restaurantId}&item_name=${itemName}` })
+    return response
+  }
+
+  async getUserByUserId(id) {
+    let response = await this.request({ endpoint: `auth/id?userId=${id}`})
+    return response.data.user
+  }
+
+  async getReviews(id) {
+    let response = await this.request({ endpoint: `review/user?id=${id}`})
+    return response
+  }
+
+  async favoriteCuisine(userId) {
+    let response = await this.request({ endpoint: `preference/favorite-cuisine/${userId}` })
+    return response
+  }
+
+  async deleteReview(id) {
+    let response = await this.request({ endpoint: `review/delete?id=${id}`, method: 'DELETE'})
     return response
   }
 }
 
-export default new ApiClient('http://localhost:3001');
+export default new ApiClient(API_BASE_URL || "http://localhost:3001");

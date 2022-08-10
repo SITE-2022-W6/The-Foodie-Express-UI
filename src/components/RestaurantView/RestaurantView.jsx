@@ -22,7 +22,10 @@ export default function RestaurantView() {
 
   const banner = new Map(Object.entries(data));
 
-  const getBanner = (data) => {
+  const getBanner = (name, data) => {
+    if (banner.has(name)) {
+      return banner.get(name)
+    }
     if (banner.has(data)) {
       return banner.get(data);
     } else {
@@ -35,10 +38,10 @@ export default function RestaurantView() {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     async function getMenu(menuId) {
       setIsLoading(true);
       const menuList = await apiClient.getMenuByOpenMenuId(menuId);
-      //console.log(menuList);
       setRestaurantsInfo(menuList.data.menu.restaurant_info);
       setCuisine(menuList.data.menu.environment_info.cuisine_type_primary);
       setMenu(menuList.data.menu.menu);
@@ -48,18 +51,15 @@ export default function RestaurantView() {
   }, [id]);
 
   return (
-    <div className="grid">
+    <div className="grid navbar-margin-top">
       {!isLoading ? (
         <div className="restaurant-view">
           {/* Restauant Header */}
           <div className="banner">
-            <img src={getBanner(cuisine)} className="banner" />
+            <img src={getBanner(restaurantInfo.restaurant_name, cuisine)} className="banner" />
           </div>
           <div className="heading" style={{marginBottom: '2em'}}>
             <h1 style={{marginBottom: "0"}}>{restaurantInfo.restaurant_name}</h1>
-            {restaurantInfo.brief_description && (
-              <h3 style={{margin: '0.5em 0'}}>{restaurantInfo.brief_description}</h3>
-            )}
             <div className="info" style={{display: 'flex', gap: '10px', alignItems: 'center', margin: '0'}}>
               <span>{restaurantInfo.address_1}, {restaurantInfo.city_town},{' '}
               {restaurantInfo.state_province} </span>
@@ -135,7 +135,7 @@ export default function RestaurantView() {
                       to={group.group_name}
                       smooth={true}
                       duration={500}
-                      offset={-25}
+                      offset={-125}
                     >
                       <h3>{group.group_name}</h3>
                     </ScrollTo>

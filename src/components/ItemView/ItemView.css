@@ -6,11 +6,17 @@
 .item-view {
   background: #fff;
   padding: 1em;
-  margin: 2em;
+  margin: 1em 0;
+  width: 50%;
   display: inline-flex;
   justify-content: center;
   flex-direction: column;
   border-radius: 1em;
+}
+
+.item-view .add-review-btn, .item-view .submit-review-btn {
+  background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
+  color: #ffffff;
 }
 
 .item-view .review-session {
@@ -19,4 +25,23 @@
   overflow-y: scroll;
   top: 0;
   bottom: 0;
+}
+
+.item-view .item-review {
+  background: #f1f1f1;
+  padding: 1em;
+  border-radius: 1em;
+  margin-bottom: 1em;
+}
+
+.item-review .name-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 0;
+}
+
+.item-review .review-content {
+  margin-top: 1em;
+  font-weight: bold;
 }

@@ -9,16 +9,30 @@
   display: inline-flex;
   flex-wrap: wrap;
   flex-direction: column;
-  background: #ffffff;
+  background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
   border-radius: 1em;
   padding: 1em;
+  margin-top: 2em
 }
 
-.profile .view {
+.profile .recent-review {
+  margin-top: 2em;
+  background: linear-gradient(45deg, #fafaff 0%, #f8f8ff 100%);
+  padding: 1em;
+  width: 60%;
+  height: 750px;
+  border-radius: 1em;
+  overflow: auto;
+}
+
+.profile .profile-review {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
-  gap: 20px;
+  background: linear-gradient(45deg, #e2e2e2 0%, #f1f1f1 100%);
+  padding: 1em;
+  border-radius: 1em;
+  margin-bottom: 1em;
 }
 
 .profile .pfp {
@@ -28,3 +42,20 @@
   border: 1px solid #00000080;
 }
 
+.profile .delete-btn {
+  background: linear-gradient(45deg, #ef233c 0%, #ff5a7e 100%);
+}
+
+
+.profile .yes-btn, .profile .no-btn, .profile .delete-btn  {
+  color: #ffffff;
+  margin-right: 1em;
+}
+
+.profile .yes-btn {
+  background: linear-gradient(45deg, #00b4d8 0%, #00cdd8 100%);
+}
+
+.profile .no-btn {
+  background: linear-gradient(45deg, #0077b6 0%, #00a6d1 100%);
+}

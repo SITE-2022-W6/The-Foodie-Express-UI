@@ -18,6 +18,7 @@ export default function Dashboard(props) {
   const [statusCode, setStatusCode] = useState()
   const restaurantType = new Set();
   const [offset, setOffset] = useState(0);
+  const [filter, setFilter] = useState("Nearby")
 
   //To update the search term useState
   const handleChange = (e) => {
@@ -27,6 +28,11 @@ export default function Dashboard(props) {
   const handleChangeCat = (e) => {
     setRestType(e.target.value);
   };
+
+  //Handles changes to type of results being shown (Nearby or Recommended)
+  const handleChangeFilter = (e) => {
+    setFilter(e.target.value)
+  }
 
   //Loads more restaurants
   async function loadMore() {
@@ -44,16 +50,42 @@ export default function Dashboard(props) {
   props.setHideNavbar(false);
   props.setFooter(true);
 
+  //Saves the address on refresh
   useEffect(() => {
+    //Get from local Storage
+    const cs = window.localStorage.getItem("cityState")
+    const add = window.localStorage.getItem("address")
+    // console.log({cs})
+    // console.log({add})
+    // console.log(cs && cs != "null" )
+    //If there was something in local storage, and nothing for the props
+    //Set the props
+    if(cs && cs != "null" && props.cityState == null)
+    {
+      // console.log("setting???")
+      props.setCityState(JSON.parse(cs))
+      props.setAddress(add)
+    }
+    //Else save the new address to local storage
+    else{
+      // console.log("LOCAL STORAGE")
+      // console.log(props.cityState)
+      // console.log(props.address)
+      window.localStorage.setItem("address", props.address)
+      window.localStorage.setItem("cityState", JSON.stringify(props.cityState))
+    }
+  }, [props.cityState])
+
+  useEffect(() => {
+     window.scrollTo(0, 0)
     async function getRestaurants(cs) {
       setOffset(0);
       setIsLoading(true);
-      // console.log(cs)
       const restaurantlist = await apiClient.getRestaurantsByLocation(cs, 0);
-      // console.log(restaurantlist)
       setRestaurants(restaurantlist.data.restaurants)
       setStatusCode(restaurantlist.status)
       setIsLoading(false)
+      // console.log("ran")
     }
     getRestaurants(props.cityState);
   }, [props.cityState]);
@@ -74,11 +106,9 @@ export default function Dashboard(props) {
     });
   }
 
-  // console.log(restaurants)
-
   return (
-    <div className="dashboard">
-      {!props.address && <Navigate to="/" />}
+    <div className="dashboard navbar-margin-top">
+      {/* {!props.address && <Navigate to="/" />} */}
       <h1 style={{ fontSize: '3em' }}>
         {/* Welcoming user who log on or not logged in */}
         Hi {props.userInfo?.firstName ? props.userInfo.firstName : 'Stranger'},
@@ -90,7 +120,7 @@ export default function Dashboard(props) {
           type="text"
           className="input search-input"
           onChange={handleChange}
-          placeholder="Search Restauant Name.."
+          placeholder="Search Restauant Name"
         />
         <select className="select" name="food-type" onChange={handleChangeCat}>
           <option value="">All</option>
@@ -98,12 +128,13 @@ export default function Dashboard(props) {
             return <option value={type}>{type}</option>;
           })}
         </select>
-        <select className="select" name="category">
+        <select className="select" name="category" onChange={handleChangeFilter}>
           <option value="nearby">Nearby</option>
           <option value="recommended">Recommended</option>
         </select>
       </div>
-      {(!isLoading && statusCode == 200) ? (
+      {/* Not loading, and there are restaruants to display */}
+      {!isLoading && statusCode == 200 &&
         <div className="grid">
           {restaurants
             .filter((cat) => {
@@ -131,10 +162,10 @@ export default function Dashboard(props) {
                 />
               );
             })}
-        </div>
-      ) : (
-        (!isLoading && statusCode == 204) ? <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1> : <Loading />
-      )}
+        </div>}
+        {/* Not loading, but there are no more restaurants to display*/}
+        {!isLoading && statusCode == 204 && <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1>}
+        {isLoading && <Loading />}
       <div className="center-btn">
         {!isLoadingBtn ? (
           <button
@@ -147,7 +178,7 @@ export default function Dashboard(props) {
           </button>
         ) : (
           <button className="btn load-more-btn loading-more">
-            <div style={{ margin: '0' }}>Logging in</div>
+            <div style={{ margin: '0' }}>Loading More</div>
             <Ripple color="#ffffff" size={21} />
           </button>
         )}

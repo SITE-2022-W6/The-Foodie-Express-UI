@@ -106,7 +106,9 @@ function App() {
               setFooter={setFooter}
               setHideNavbar={setHideNavbar}
               userInfo={userInfo}
+              setAddress={setAddress}
               address={address}
+              setCityState={setCityState}
               cityState={cityState}
             />
           }

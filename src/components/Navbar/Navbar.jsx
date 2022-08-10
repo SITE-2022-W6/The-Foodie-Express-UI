@@ -44,6 +44,7 @@ export default function Navbar(props) {
     window.localStorage.removeItem('is_authenticated')
     props.setIsAuthenticated(false);
     navigate('/dashboard');
+    window.location.reload();
   }
 
   let dropdownRef = useRef()
