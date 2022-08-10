@@ -62,7 +62,8 @@ export default function ItemView(props) {
     setIsLoading(true);
     const { data, error } = await apiClient.createReview({
       user_id: props.userInfo.id,
-      restaurant_id: restId,
+      restaurant_id: restaurantId,
+      rest_id: restId,
       menu_item_name: itemName,
       rating: ratingValue,
       content: comment,
