@@ -84,6 +84,14 @@ class ApiClient {
     return response;
   }
 
+  async getIdFromOpenMenuId(OMId) {
+    let response = await this.request({
+      endpoint: `restaurant/OMId?OMId=${OMId}`
+    })
+    console.log(response)
+    return response.data.id
+  }
+
   //Gets details about a specific menu item
   async getMenuItem(restaurantId, itemName) {
     let response = await this.request({
