@@ -19,6 +19,7 @@ export default function RestaurantView() {
   const [menu, setMenu] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const [rating, setRating] = useState()
 
   const banner = new Map(Object.entries(data));
 
@@ -37,6 +38,12 @@ export default function RestaurantView() {
     }
   };
 
+  async function getAverageRating()
+  {
+    const rating = await apiClient.getRestaurantAverageRating(id)
+    setRating(rating.data.rating.avg)
+  }
+  
   useEffect(() => {
     window.scrollTo(0, 0)
     async function getMenu(menuId) {
@@ -48,6 +55,7 @@ export default function RestaurantView() {
       setIsLoading(false);
     }
     getMenu(id);
+    getAverageRating()
   }, [id]);
 
   return (
@@ -67,17 +75,17 @@ export default function RestaurantView() {
               {restaurantInfo.phone && <span>{restaurantInfo.phone}</span>}
               {cuisine && <span>{'•'}</span>}
               {cuisine && <span>{cuisine}</span>}
-              <span>{'•'}</span>
+              {rating && <><span>{'•'}</span>
               <span>
                 <Rating
-                  placeholderRating={3.5}
+                  placeholderRating={rating}
                   fractions={2}
                   placeholderSymbol={<BsStarFill size={16}/>}
                   emptySymbol={<BsStar size={16}/>}
                   fullSymbol={<BsStarFill size={16}/>}
                   readonly
                 />
-              </span>
+              </span></>}
             </div>
           </div>
           <div className="menu">

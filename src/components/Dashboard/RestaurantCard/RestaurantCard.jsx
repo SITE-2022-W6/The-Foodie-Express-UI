@@ -4,6 +4,7 @@ import data from '../../banner.json'
 import Rating from 'react-rating';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import './RestaurantCard.css';
+import apiClient from '../../../services/apiClient';
 
 export default function RestaurantCard(props) {
   const banner = new Map(Object.entries(data));
@@ -28,6 +29,7 @@ export default function RestaurantCard(props) {
   const service = new google.maps.DistanceMatrixService()
   const [distance, setDistance] = React.useState("")
   const [gotDistance, setGotDistance] = React.useState(false)
+  const [rating, setRating] = React.useState()
 
   async function calculateDistance()
   {
@@ -51,8 +53,15 @@ export default function RestaurantCard(props) {
     )
   }
 
+  async function getAverageRating()
+  {
+    const rating = await apiClient.getRestaurantAverageRating(props.restaurant.id)
+    setRating(rating.data.rating.avg)
+  }
+
   React.useEffect(() => {
     calculateDistance()
+    getAverageRating()
   }, [])
   
 
@@ -67,14 +76,14 @@ export default function RestaurantCard(props) {
             </div>
             <div className="head">
               <p className="address">{props.restaurant.address_1}</p>
-              <Rating
-                placeholderRating={3.5}
+              {rating && <Rating
+                placeholderRating={rating}
                 fractions={2}
                 placeholderSymbol={<BsStarFill size={20}/>}
                 emptySymbol={<BsStar size={20}/>}
                 fullSymbol={<BsStarFill size={20}/>}
                 readonly
-              />
+              />}
             </div>
           </div>
         </Link>

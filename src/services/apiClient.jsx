@@ -133,6 +133,12 @@ class ApiClient {
     let response = await this.request({ endpoint: `review/delete?id=${id}`, method: 'DELETE'})
     return response
   }
+
+  async getRestaurantAverageRating(OMId)
+  {
+    let response = await this.request({ endpoint: `restaurant/rating?OMId=${OMId}`})
+    return response
+  }
 }
 
 export default new ApiClient(API_BASE_URL || "http://localhost:3001");
