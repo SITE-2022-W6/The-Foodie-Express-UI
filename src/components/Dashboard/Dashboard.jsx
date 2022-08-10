@@ -18,6 +18,7 @@ export default function Dashboard(props) {
   const [statusCode, setStatusCode] = useState()
   const restaurantType = new Set();
   const [offset, setOffset] = useState(0);
+  const [filter, setFilter] = useState("Nearby")
 
   //To update the search term useState
   const handleChange = (e) => {
@@ -27,6 +28,11 @@ export default function Dashboard(props) {
   const handleChangeCat = (e) => {
     setRestType(e.target.value);
   };
+
+  //Handles changes to type of results being shown (Nearby or Recommended)
+  const handleChangeFilter = (e) => {
+    setFilter(e.target.value)
+  }
 
   //Loads more restaurants
   async function loadMore() {
@@ -122,13 +128,13 @@ export default function Dashboard(props) {
             return <option value={type}>{type}</option>;
           })}
         </select>
-        <select className="select" name="category">
-          <option value="for-you">For You</option>
+        <select className="select" name="category" onChange={handleChangeFilter}>
           <option value="nearby">Nearby</option>
           <option value="recommended">Recommended</option>
         </select>
       </div>
-      {(!isLoading && statusCode == 200) ? (
+      {/* Not loading, and there are restaruants to display */}
+      {!isLoading && statusCode == 200 &&
         <div className="grid">
           {restaurants
             .filter((cat) => {
@@ -156,10 +162,10 @@ export default function Dashboard(props) {
                 />
               );
             })}
-        </div>
-      ) : (
-        (!isLoading && statusCode == 204) ? <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1> : <Loading />
-      )}
+        </div>}
+        {/* Not loading, but there are no more restaurants to display*/}
+        {!isLoading && statusCode == 204 && <h1>No restaurants found at "{props.cityState.city}, {props.cityState.state}". Please try another address. </h1>}
+        {isLoading && <Loading />}
       <div className="center-btn">
         {!isLoadingBtn ? (
           <button
