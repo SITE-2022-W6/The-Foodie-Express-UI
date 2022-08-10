@@ -45,6 +45,7 @@ export default function ItemView(props) {
     });
     async function setId() {
       const id = await apiClient.getIdFromOpenMenuId(restaurantId)
+      console.log(id)
       setRestId(id.id)
     }
     setId()
@@ -60,6 +61,14 @@ export default function ItemView(props) {
 
   const handleSubmit = async () => {
     setIsLoading(true);
+    console.log({
+      user_id: props.userInfo.id,
+      restaurant_id: restaurantId,
+      rest_id: restId,
+      menu_item_name: itemName,
+      rating: ratingValue,
+      content: comment,
+    })
     const { data, error } = await apiClient.createReview({
       user_id: props.userInfo.id,
       restaurant_id: restaurantId,

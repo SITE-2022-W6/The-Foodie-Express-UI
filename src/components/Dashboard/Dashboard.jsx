@@ -7,6 +7,7 @@ import Loading from '../Loading/Loading';
 import RestaurantCard from './RestaurantCard/RestaurantCard';
 import './Dashboard.css';
 import apiClient from '../../services/apiClient';
+import { BsFilter } from 'react-icons/bs';
 
 export default function Dashboard(props) {
   /* useState to find the restaurant with the given search term */
@@ -33,13 +34,13 @@ export default function Dashboard(props) {
   //Handles changes to type of results being shown (Nearby or Recommended)
   const handleChangeFilter = async (e) => {
     console.log("changed")
-    console.log(statusCode)
     setIsLoading(true)
     setFilter(e.target.value)
     if(e.target.value === "Recommended")
     {
       const recommend = await apiClient.favoriteCuisine(props.userInfo.id)
-      setRecCuisine(recommend.cuisine)
+      console.log(recommend)
+      setRecCuisine(recommend.data.cuisine)
     }
     setIsLoading(false)
   }
@@ -98,7 +99,7 @@ export default function Dashboard(props) {
       // console.log("ran")
     }
     getRestaurants(props.cityState);
-  }, [props.cityState]);
+  }, [props.cityState, filter]);
 
   const banner = new Map(Object.entries(data));
   if (statusCode == 200) {
@@ -139,8 +140,8 @@ export default function Dashboard(props) {
           })}
         </select>
         <select className="select" name="category" onChange={handleChangeFilter}>
-          <option value="nearby">Nearby</option>
-          <option value="recommended">Recommended</option>
+          <option value="Nearby">Nearby</option>
+          <option value="Recommended">Recommended</option>
         </select>
       </div>
       {/* Not loading, and there are restaruants to display*/}
