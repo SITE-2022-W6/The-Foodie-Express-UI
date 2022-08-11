@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from "../../constants"
+import RestaurantView from '../components/RestaurantView/RestaurantView';
 
 class ApiClient {
   constructor(remoteHostUrl) {
@@ -88,7 +89,6 @@ class ApiClient {
     let response = await this.request({
       endpoint: `restaurant/OMId?OMId=${OMId}`
     })
-    console.log(response)
     return response.data.id
   }
 
@@ -137,6 +137,12 @@ class ApiClient {
   async getRestaurantAverageRating(OMId)
   {
     let response = await this.request({ endpoint: `restaurant/rating?OMId=${OMId}`})
+    return response
+  }
+
+  async getMenuItemAverageRating(restuarantId, itemName)
+  {
+    let response = await this.request({ endpoint: `menu/rating?restaurantId=${restuarantId}&itemName=${itemName}`})
     return response
   }
 }

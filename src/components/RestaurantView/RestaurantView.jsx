@@ -10,6 +10,7 @@ import Rating from 'react-rating';
 import { BsStar, BsStarFill } from 'react-icons/bs';
 import data from '../banner.json';
 import './RestaurantView.css';
+import ItemCard from './ItemCard/ItemCard';
 
 export default function RestaurantView() {
   // The JSON variable from the api to display the menu from the given restaurant id
@@ -103,7 +104,8 @@ export default function RestaurantView() {
                           let itemId = index;
                           return (
                             <div className="item" key={itemId}>
-                              <Link
+                              <ItemCard restaurantId={id} itemName={item.menu_item_name} itemDescription={item.menu_item_description}/>
+                              {/* <Link
                                 to={`/item/${id}/${item.menu_item_name}`}
                                 style={{
                                   textDecoration: 'none',
@@ -116,7 +118,7 @@ export default function RestaurantView() {
                                     {item.menu_item_description}
                                   </p>
                                 ) : null}
-                              </Link>
+                              </Link> */}
                             </div>
                           );
                         })}
